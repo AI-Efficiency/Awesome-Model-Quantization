@@ -1276,9 +1276,9 @@ All titles and links remain directly in this README, with every year expanded fo
 
 ## Researcher Homepages
 
-A **non-exhaustive selection** of researchers whose work contributes to model quantization, **listed alphabetically by given name, not ranked**. The list includes researchers at different career stages, in academia and industry, across the Americas, Europe, and Asia. Suggestions for additions and corrections are welcome.
+A few researchers working on model quantization, listed **alphabetically by given name**. This is a starting point, not a complete list or a ranking. Additions and corrections are welcome.
 
-Affiliations and positions follow the linked personal or institutional profiles, checked in September 2026.
+Institutions and positions are based on the linked profiles, last checked in September 2026.
 
 | Name | Institution | Position | Homepage |
 | --- | --- | --- | --- |
