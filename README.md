@@ -96,12 +96,12 @@ From binary weights and learned codebooks to integer arithmetic, learned quantiz
   *ICCV 2019* · `Mixed Precision` `Hessian-Aware` · [Paper](https://openaccess.thecvf.com/content_ICCV_2019/html/Dong_HAWQ_Hessian_AWare_Quantization_of_Neural_Networks_With_Mixed-Precision_ICCV_2019_paper.html) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22HAWQ%3A%20Hessian%20AWare%20Quantization%20of%20Neural%20Networks%20With%20Mixed-Precision%22)<br>
   Uses Hessian information to guide mixed-precision neural network quantization.
 
-- **Learned Step Size Quantization (LSQ)**<br>
+- **Learned Step Size Quantization**<br>
   Steven K. Esser, Jeffrey L. McKinstry, Deepika Bablani, Rathinakumar Appuswamy, Dharmendra S. Modha<br>
   *ICLR 2020* · `QAT` `Low-Bit` · [Paper](https://arxiv.org/abs/1902.08153) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Learned%20Step%20Size%20Quantization%22)<br>
   Learns quantizer step sizes alongside network parameters.
 
-- **Up or Down? Adaptive Rounding for Post-Training Quantization (AdaRound)**<br>
+- **Up or Down? Adaptive Rounding for Post-Training Quantization**<br>
   Markus Nagel, Rana Ali Amjad, Mart van Baalen, Christos Louizos, Tijmen Blankevoort<br>
   *ICML 2020* · `PTQ` `Rounding` · [Paper](https://arxiv.org/abs/2004.10568) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Up%20or%20Down%3F%20Adaptive%20Rounding%20for%20Post-Training%20Quantization%22)<br>
   Optimizes rounding decisions when converting pretrained weights to low precision.
@@ -228,7 +228,7 @@ QLoRA and related methods adapt low-bit bases with low-rank updates; PV-Tuning a
   *ICLR 2024* · `LLM` `PEFT` `Low-Bit` · [Paper](https://openreview.net/forum?id=LzPWWPAdY4) · [Code](https://github.com/yxli2123/LoftQ) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22LoftQ%3A%20LoRA-Fine-Tuning-aware%20Quantization%20for%20Large%20Language%20Models%22) [![GitHub stars](https://img.shields.io/github/stars/yxli2123/LoftQ?style=flat&label=stars&color=555)](https://github.com/yxli2123/LoftQ)<br>
   Aligns quantization with LoRA initialization to reduce the error encountered during adaptation.
 
-- **Accurate LoRA-Finetuning Quantization of LLMs via Information Retention (IR-QLoRA)**<br>
+- **Accurate LoRA-Finetuning Quantization of LLMs via Information Retention**<br>
   Haotong Qin, Xudong Ma, Xingyu Zheng, Xiaoyang Li, Yang Zhang, Shouda Liu, Jie Luo, Xianglong Liu, Michele Magno<br>
   *ICML 2024* · `LLM` `PEFT` `Information-Aware` · [Paper](https://proceedings.mlr.press/v235/qin24b.html) · [Code](https://github.com/htqin/IR-QLoRA) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Accurate%20LoRA-Finetuning%20Quantization%20of%20LLMs%20via%20Information%20Retention%22) [![GitHub stars](https://img.shields.io/github/stars/htqin/IR-QLoRA?style=flat&label=stars&color=555)](https://github.com/htqin/IR-QLoRA)<br>
   Uses information retention to improve low-bit quantization and LoRA adaptation.
@@ -252,7 +252,7 @@ Binary CNNs and transformers, post-training binarization, and native ternary pre
   *ECCV 2018* · `CNN` `Binary` `QAT` · [Paper](https://openaccess.thecvf.com/content_ECCV_2018/papers/zechun_liu_Bi-Real_Net_Enhancing_ECCV_2018_paper.pdf) · [Code](https://github.com/liuzechun/Bi-Real-net) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Bi-Real%20Net%3A%20Enhancing%20the%20Performance%20of%201-bit%20CNNs%20With%20Improved%20Representational%20Capability%20and%20Advanced%20Training%20Algorithm%22) [![GitHub stars](https://img.shields.io/github/stars/liuzechun/Bi-Real-net?style=flat&label=stars&color=555)](https://github.com/liuzechun/Bi-Real-net)<br>
   Connects real-valued intermediate activations through shortcuts to improve information flow in 1-bit CNNs.
 
-- **Forward and Backward Information Retention for Accurate Binary Neural Networks (IR-Net)**<br>
+- **Forward and Backward Information Retention for Accurate Binary Neural Networks**<br>
   Haotong Qin, Ruihao Gong, Xianglong Liu, Mingzhu Shen, Ziran Wei, Fengwei Yu, Jingkuan Song<br>
   *CVPR 2020* · `CNN` `QAT` `Binary` `1-Bit` · [Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Qin_Forward_and_Backward_Information_Retention_for_Accurate_Binary_Neural_Networks_CVPR_2020_paper.pdf) · [Code](https://github.com/htqin/IR-Net) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Forward%20and%20Backward%20Information%20Retention%20for%20Accurate%20Binary%20Neural%20Networks%22) [![GitHub stars](https://img.shields.io/github/stars/htqin/IR-Net?style=flat&label=stars&color=555)](https://github.com/htqin/IR-Net)<br>
   Retains information in both forward activations and backward gradients when training binary neural networks.
@@ -277,7 +277,7 @@ Binary CNNs and transformers, post-training binarization, and native ternary pre
   *ACL Findings 2024* · `LLM` `Dual Binarization` `Extreme Low-Bit` · [Paper](https://aclanthology.org/2024.findings-acl.516/) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22DB-LLM%3A%20Accurate%20Dual-Binarization%20for%20Efficient%20LLMs%22)<br>
   Uses dual binarization to compress LLMs while retaining accuracy.
 
-- **The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits (BitNet b1.58)**<br>
+- **The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits**<br>
   Shuming Ma, Hongyu Wang, Lingxiao Ma, Lei Wang, Wenhui Wang, Shaohan Huang, Li Dong, Ruiping Wang, Jilong Xue, Furu Wei<br>
   *arXiv 2024* · `LLM` `QAT` `Ternary Weights` `8-Bit Activations` · [Paper](https://arxiv.org/abs/2402.17764) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22The%20Era%20of%201-bit%20LLMs%3A%20All%20Large%20Language%20Models%20are%20in%201.58%20Bits%22)<br>
   Extends BitNet’s quantization-aware pretraining to ternary weights; this is a training recipe, distinct from post-training binarization.
@@ -336,7 +336,7 @@ From CNN product quantization to LLM additive, lattice and trellis codes. QuIP p
   *SIGMOD 2024* · `Vector Quantization` `Binary Codes` `Vector Search` · [Paper](https://dl.acm.org/doi/10.1145/3654970) · [Code](https://github.com/gaoj0017/RaBitQ) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22RaBitQ%3A%20Quantizing%20High-Dimensional%20Vectors%20with%20a%20Theoretical%20Error%20Bound%20for%20Approximate%20Nearest%20Neighbor%20Search%22) [![GitHub stars](https://img.shields.io/github/stars/gaoj0017/RaBitQ?style=flat&label=stars&color=555)](https://github.com/gaoj0017/RaBitQ)<br>
   Quantizes high-dimensional vectors with a theoretical error bound for approximate nearest-neighbor search.
 
-- **Extreme Compression of Large Language Models via Additive Quantization (AQLM)**<br>
+- **Extreme Compression of Large Language Models via Additive Quantization**<br>
   Vage Egiazarian, Andrei Panferov, Denis Kuznedelev, Elias Frantar, Artem Babenko, Dan Alistarh<br>
   *ICML 2024* · `LLM` `PTQ` `Additive Codebooks` `2–3 Bit` · [Paper](https://openreview.net/forum?id=5mCaITRTmO) · [Code](https://github.com/Vahe1994/AQLM) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Extreme%20Compression%20of%20Large%20Language%20Models%20via%20Additive%20Quantization%22) [![GitHub stars](https://img.shields.io/github/stars/Vahe1994/AQLM?style=flat&label=stars&color=555)](https://github.com/Vahe1994/AQLM)<br>
   Represents weight vectors as sums of learned codewords and jointly optimizes codebooks within transformer blocks.
@@ -389,7 +389,7 @@ These methods compress inference-time key and value tensors; their bit widths ar
 
 Early diffusion PTQ addresses denoising-step sensitivity; later work extends to diffusion transformers, low-rank outlier handling and video generation.
 
-- **Post-training Quantization on Diffusion Models (PTQ4DM)**<br>
+- **Post-training Quantization on Diffusion Models**<br>
   Yuzhang Shang, Zhihang Yuan, Bin Xie, Bingzhe Wu, Yan Yan<br>
   *CVPR 2023* · `Diffusion` `PTQ` · [Paper](http://openaccess.thecvf.com/content/CVPR2023/html/Shang_Post-Training_Quantization_on_Diffusion_Models_CVPR_2023_paper.html) · [Code](https://github.com/42Shawn/PTQ4DM) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Post-training%20Quantization%20on%20Diffusion%20Models%22) [![GitHub stars](https://img.shields.io/github/stars/42Shawn/PTQ4DM?style=flat&label=stars&color=555)](https://github.com/42Shawn/PTQ4DM)<br>
   Adapts post-training quantization to diffusion model inference.
