@@ -1814,7 +1814,7 @@ Institutions and positions are based on the linked profiles, last checked in Sep
 | Christopher De Sa | Cornell University | Associate Professor | [Homepage](https://www.cs.cornell.edu/~cdesa/) |
 | Dan Alistarh | Institute of Science and Technology Austria (ISTA) | Professor | [Homepage](https://daslab.ista.ac.at/) |
 | Guangxuan Xiao | Thinking Machines Lab | Member of Technical Staff | [Homepage](https://guangxuanx.com/) |
-| Haotong Qin | The Hong Kong Polytechnic University | Assistant Professor | [Homepage](https://htqin.github.io/) |
+| Haotong Qin | Hong Kong Polytechnic University | Assistant Professor | [Homepage](https://htqin.github.io/) |
 | Itay Hubara | Stealth startup | Director of AI | [Homepage](https://itayhubara.github.io/) |
 | Jae-Joon Kim | Seoul National University | Professor | [Homepage](https://sites.google.com/site/kimjaejoon) |
 | Kurt Keutzer | University of California, Berkeley | Professor | [Homepage](https://people.eecs.berkeley.edu/~keutzer/Main.htm) |
