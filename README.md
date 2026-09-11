@@ -1278,7 +1278,7 @@ All titles and links remain directly in this README, with every year expanded fo
 
 A **non-exhaustive selection** of researchers whose work contributes to model quantization, **listed alphabetically by given name, not ranked**. The list includes researchers at different career stages, in academia and industry, across the Americas, Europe, and Asia. Suggestions for additions and corrections are welcome.
 
-Affiliations and positions were checked in September 2026.
+Affiliations and positions follow the linked personal or institutional profiles, checked in September 2026.
 
 | Name | Institution | Position | Homepage |
 | --- | --- | --- | --- |
@@ -1289,12 +1289,15 @@ Affiliations and positions were checked in September 2026.
 | Itay Hubara | Stealth startup | Director of AI | [Homepage](https://itayhubara.github.io/) |
 | Jae-Joon Kim | Seoul National University | Professor | [Homepage](https://sites.google.com/site/kimjaejoon) |
 | Kurt Keutzer | University of California, Berkeley | Professor | [Homepage](https://people.eecs.berkeley.edu/~keutzer/Main.htm) |
+| Ruihao Gong | Beihang University | Assistant Professor | [Homepage](https://xhplus.github.io/) |
 | Song Han | Massachusetts Institute of Technology | Associate Professor | [Homepage](https://hanlab.mit.edu/songhan) |
 | Tim Dettmers | Carnegie Mellon University | Assistant Professor | [Homepage](https://timdettmers.com/) |
 | Torsten Hoefler | ETH Zürich | Professor | [Homepage](https://htor.inf.ethz.ch/) |
+| Wenqi Shao | Shanghai AI Laboratory | Research Scientist | [Homepage](https://wqshao126.github.io/) |
+| Yu Wang | Tsinghua University | Professor | [Homepage](https://web.ee.tsinghua.edu.cn/wangyu/en/index/2145/list/index.htm) |
 | Yulhwa Kim | Sungkyunkwan University | Assistant Professor | [Homepage](https://eic.skku.edu/yulhwa-kim) |
 | Zechun Liu | Meta | Staff Research Scientist | [Homepage](https://zechunliu.com/) |
-| Zhen Dong | NVIDIA | Research Scientist | [Homepage](https://dong-zhen.com/) |
+| Zhen Dong | University of California, Santa Barbara | Assistant Professor | [Homepage](https://dong-zhen.com/) |
 
 ## Contributing / Scope
 
