@@ -4,26 +4,27 @@ Awesome Model Quantization is a curated, continuously updated collection of pape
 
 ## Quick Navigation
 
-- [Research Landscape](#research-landscape) — a quick map of the field
-- [Representative Works](#representative-works) — technical lineages with short descriptions
+- [Research Landscape](#research-landscape)
+- [Representative Works](#representative-works)
 - [Benchmarks](#benchmarks) · [Survey Papers](#survey-papers)
-- [Papers by Year](#papers-by-year) — [2026](#2026) · [2025](#2025) · [2024](#2024) · [2023](#2023) · [2022](#2022) · [2021](#2021) · [2020](#2020) · [2019](#2019) · [2018](#2018) · [2017](#2017) · [2016](#2016) · [2015](#2015)
-- [Books](#books) · [Related Repositories](#related-repositories) · [Contributing / Scope](#contributing--scope)
+- [Papers by Year](#papers-by-year)<br>
+  [2026](#2026) · [2025](#2025) · [2024](#2024) · [2023](#2023) · [2022](#2022) · [2021](#2021) · [2020](#2020) · [2019](#2019) · [2018](#2018) · [2017](#2017) · [2016](#2016) · [2015](#2015)
+- [Books](#books) · [Related Repositories](#related-repositories) · [Researcher Homepages](#researcher-homepages) · [Contributing / Scope](#contributing--scope)
 
 ## Research Landscape
 
-Five complementary ways to browse model quantization:
+Model quantization can be organized along five dimensions:
 
-- **How it is optimized** — post-training quantization (PTQ), quantization-aware training (QAT), quantized fine-tuning, data-free methods, and low-precision training.
-- **How values are represented** — scalar, vector/codebook, lattice, binary-coded, binary/ternary, and mixed-precision quantization.
-- **How errors are reduced** — rotations, outlier smoothing, residual reconstruction, error compensation, and sensitivity-aware methods.
-- **What is quantized** — weights, activations, KV caches, training states, gradients, and communication.
-- **Where it is used** — vision, language, multimodal, generative, state space, and graph models, alongside edge and hardware systems.
+- **Optimization:** post-training quantization (PTQ), quantization-aware training (QAT), quantized fine-tuning, data-free methods, and low-precision training.
+- **Representation:** scalar, vector/codebook, lattice, binary-coded, binary/ternary, and mixed-precision quantization.
+- **Error reduction:** rotations, outlier smoothing, residual reconstruction, error compensation, and sensitivity-aware methods.
+- **Quantized tensors:** weights, activations, KV caches, training states, gradients, and communication.
+- **Models and deployment:** vision, language, multimodal, generative, state space, and graph models, alongside edge and hardware systems.
 
-These dimensions overlap: one method may combine PTQ, rotations, and vector codebooks. Explore the [representative works](#representative-works) below for concrete examples.
+Methods often combine several dimensions, such as PTQ with rotations and vector codebooks.
 
 <details>
-<summary>Explore the taxonomy and method connections</summary>
+<summary><strong>🔎 Explore the taxonomy and method connections · Click to expand</strong></summary>
 
 **Optimization paradigm**
 
@@ -53,7 +54,7 @@ Bit width alone does not specify storage overhead, arithmetic precision, or depl
 
 ## Representative Works
 
-Selected starting points, grouped by technical lineage. Titles, venues, and links follow the existing collection; code links are included where recorded. Browse [all papers by year](#papers-by-year) for the full list.
+Selected works by technical lineage, with full author lists and brief method summaries. Browse [all papers by year](#papers-by-year) for the complete collection.
 
 - **Foundations:** [Classical / QAT](#classical-quantization-and-qat) · [Extreme low-bit](#extreme-low-bit-binary-and-ternary) · [Vector / lattice / codebook](#vector-lattice-and-codebook-quantization)
 - **Language models:** [Transformer / LLM](#transformer-and-llm-quantization) · [Quantized fine-tuning](#quantized-fine-tuning) · [KV cache](#kv-cache-quantization)
@@ -62,250 +63,308 @@ Selected starting points, grouped by technical lineage. Titles, venues, and link
 ### Classical Quantization and QAT
 
 - **BinaryConnect: Training Deep Neural Networks with binary weights during propagations**<br>
+  Matthieu Courbariaux, Yoshua Bengio, Jean-Pierre David<br>
   *NeurIPS 2015* · `Neural Networks` `QAT` `Binary Weights` · [Paper](https://arxiv.org/abs/1511.00363) [Code](https://github.com/MatthieuCourbariaux/BinaryConnect)<br>
   Trains neural networks with binary weights during forward and backward propagation.
 
 - **XNOR-Net: ImageNet Classification Using Binary Convolutional Neural Networks**<br>
+  Mohammad Rastegari, Vicente Ordonez, Joseph Redmon, Ali Farhadi<br>
   *ECCV 2016* · `CNN` `Binary` `Weight + Activation` · [Paper](https://arxiv.org/abs/1603.05279) [Code](https://github.com/allenai/XNOR-Net)<br>
   Approximates convolutions with binary weights and inputs for efficient CNN inference.
 
 - **PACT: Parameterized Clipping Activation for Quantized Neural Networks**<br>
+  Jungwook Choi, Zhuo Wang, Swagath Venkataramani, Pierce I-Jen Chuang, Vijayalakshmi Srinivasan, Kailash Gopalakrishnan<br>
   *ICLR 2018* · `CNN` `QAT` `Activations` · [Paper](https://openreview.net/pdf?id=By5ugjyCb)<br>
   Learns activation clipping thresholds to support low-bit network training.
 
 - **Learned Step Size Quantization (LSQ)**<br>
+  Steven K. Esser, Jeffrey L. McKinstry, Deepika Bablani, Rathinakumar Appuswamy, Dharmendra S. Modha<br>
   *ICLR 2020* · `QAT` `Low-Bit` · [Paper](https://arxiv.org/abs/1902.08153)<br>
   Learns quantizer step sizes alongside network parameters.
 
 - **Up or Down? Adaptive Rounding for Post-Training Quantization (AdaRound)**<br>
+  Markus Nagel, Rana Ali Amjad, Mart van Baalen, Christos Louizos, Tijmen Blankevoort<br>
   *ICML 2020* · `PTQ` `Rounding` · [Paper](https://arxiv.org/abs/2004.10568)<br>
   Optimizes rounding decisions when converting pretrained weights to low precision.
 
 - **BRECQ: Pushing the Limit of Post-Training Quantization by Block Reconstruction**<br>
+  Yuhang Li, Ruihao Gong, Xu Tan, Yang Yang, Peng Hu, Qi Zhang, Fengwei Yu, Wei Wang, Shi Gu<br>
   *ICLR 2021* · `CNN` `PTQ` `Reconstruction` · [Paper](https://openreview.net/forum?id=POWv6hDd9XH) [Code](https://github.com/yhhhli/BRECQ)<br>
   Uses block reconstruction to reduce post-training quantization error.
 
 - **HAWQ: Hessian AWare Quantization of Neural Networks With Mixed-Precision**<br>
+  Zhen Dong, Zhewei Yao, Amir Gholami, Michael W. Mahoney, Kurt Keutzer<br>
   *ICCV 2019* · `Mixed Precision` `Hessian-Aware` · [Paper](https://openaccess.thecvf.com/content_ICCV_2019/html/Dong_HAWQ_Hessian_AWare_Quantization_of_Neural_Networks_With_Mixed-Precision_ICCV_2019_paper.html)<br>
   Uses Hessian information to guide mixed-precision neural network quantization.
 
 - **HAWQ-V2: Hessian Aware trace-Weighted Quantization of Neural Networks**<br>
+  Zhen Dong, Zhewei Yao, Daiyaan Arfeen, Amir Gholami, Michael Mahoney, Kurt Keutzer<br>
   *NeurIPS 2020* · `Mixed Precision` `Hessian-Aware` · [Paper](https://proceedings.neurips.cc/paper/2020/hash/d77c703536718b95308130ff2e5cf9ee-Abstract.html)<br>
   Develops trace-weighted Hessian sensitivity for mixed-precision allocation.
 
 ### Transformer and LLM Quantization
 
 - **LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale**<br>
+  Tim Dettmers, Mike Lewis, Younes Belkada, Luke Zettlemoyer<br>
   *NeurIPS 2022* · `Transformer` `INT8` `Mixed Precision` · [Paper](https://arxiv.org/abs/2208.07339) [Code](https://github.com/timdettmers/bitsandbytes)<br>
   Enables 8-bit matrix multiplication at transformer scale while handling outlier features in higher precision.
 
 - **GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers**<br>
+  Elias Frantar, Saleh Ashkboos, Torsten Hoefler, Dan Alistarh<br>
   *ICLR 2023* · `LLM` `PTQ` `Weights` · [Paper](https://arxiv.org/abs/2210.17323) [Code](https://github.com/IST-DASLab/gptq)<br>
   Uses approximate second-order information and error compensation for low-bit weight quantization.
 
 - **SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models**<br>
+  Guangxuan Xiao, Ji Lin, Mickael Seznec, Hao Wu, Julien Demouth, Song Han<br>
   *ICML 2023* · `LLM` `PTQ` `Weight + Activation` · [Paper](https://arxiv.org/abs/2211.10438) [Code](https://github.com/mit-han-lab/smoothquant)<br>
   Redistributes activation outlier difficulty into weights to enable low-precision matrix multiplication.
 
 - **AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration**<br>
+  Ji Lin, Jiaming Tang, Haotian Tang, Shang Yang, Wei-Ming Chen, Wei-Chen Wang, Guangxuan Xiao, Xingyu Dang, Chuang Gan, Song Han<br>
   *MLSys 2024* · `LLM` `PTQ` `Weights` `Saliency-Aware` · [Paper](https://proceedings.mlsys.org/paper_files/paper/2024/hash/42a452cbafa9dd64e9ba4aa95cc1ef21-Abstract-Conference.html) [Code](https://github.com/mit-han-lab/llm-awq)<br>
   Uses activation information to guide weight quantization for on-device compression and acceleration.
 
 - **OmniQuant: Omnidirectionally Calibrated Quantization for Large Language Models**<br>
+  Wenqi Shao, Mengzhao Chen, Zhaoyang Zhang, Peng Xu, Lirui Zhao, Zhiqian Li, Kaipeng Zhang, Peng Gao, Yu Qiao, Ping Luo<br>
   *ICLR 2024* · `LLM` `PTQ` `Calibration` · [Paper](https://openreview.net/forum?id=8Wuvhh0LYW) [Code](https://github.com/OpenGVLab/OmniQuant)<br>
   Optimizes clipping and equivalent transformations to calibrate low-bit LLMs.
 
 - **QuaRot: Outlier-Free 4-Bit Inference in Rotated LLMs**<br>
+  Saleh Ashkboos, Amirkeivan Mohtashami, Maximilian L. Croci, Bo Li, Pashmina Cameron, Martin Jaggi, Dan Alistarh, Torsten Hoefler, James Hensman<br>
   *arXiv 2024* · `LLM` `PTQ` `4-Bit` `Rotation` · [Paper](https://arxiv.org/abs/2404.00456) [Code](https://github.com/spcl/QuaRot)<br>
   Uses rotations to suppress outliers and enable 4-bit inference.
 
 - **SpinQuant: LLM Quantization with Learned Rotations**<br>
+  Zechun Liu, Changsheng Zhao, Igor Fedorov, Bilge Soran, Dhruv Choudhary, Raghuraman Krishnamoorthi, Vikas Chandra, Yuandong Tian, Tijmen Blankevoort<br>
   *ICLR 2025* · `LLM` `PTQ` `Learned Rotation` · [Paper](https://iclr.cc/virtual/2025/poster/28338)<br>
   Learns rotations to make LLM representations more amenable to quantization.
 
 - **FlatQuant: Flatness Matters for LLM Quantization**<br>
+  Yuxuan Sun, Ruikang Liu, Haoli Bai, Han Bao, Kang Zhao, Yuening Li, Jiaxin Hu, Xianzhi Yu, Lu Hou, Chun Yuan, Xin Jiang, Wulong Liu, Jun Yao<br>
   *ICML 2025* · `LLM` `PTQ` `Transformation` · [Paper](https://proceedings.mlr.press/v267/sun25l.html) [Code](https://github.com/ruikangliu/FlatQuant)<br>
   Targets distribution flatness to improve LLM quantization.
 
 ### Quantized Fine-Tuning
 
 - **QLoRA: Efficient Finetuning of Quantized LLMs**<br>
+  Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, Luke Zettlemoyer<br>
   *NeurIPS 2023* · `LLM` `PEFT` `4-Bit` · [Paper](https://neurips.cc/virtual/2023/poster/71815) [Code](https://github.com/artidoro/qlora)<br>
   Fine-tunes low-rank adapters through a frozen 4-bit quantized base model.
 
 - **QA-LoRA: Quantization-Aware Low-Rank Adaptation of Large Language Models**<br>
+  Yuhui Xu, Lingxi Xie, Xiaotao Gu, Xin Chen, Heng Chang, Hengheng Zhang, Zhengsu Chen, Xiaopeng Zhang, Qi Tian<br>
   *ICLR 2024* · `LLM` `PEFT` `Quantization-Aware` · [Paper](https://openreview.net/forum?id=WvFoJccpo8) [Code](https://github.com/yuhuixu1993/qa-lora)<br>
   Combines quantization-aware optimization with low-rank adaptation.
 
 - **LoftQ: LoRA-Fine-Tuning-aware Quantization for Large Language Models**<br>
+  Yixiao Li, Yifan Yu, Chen Liang, Pengcheng He, Nikos Karampatziakis, Weizhu Chen, Tuo Zhao<br>
   *ICLR 2024* · `LLM` `PEFT` `Low-Bit` · [Paper](https://openreview.net/forum?id=LzPWWPAdY4) [Code](https://github.com/yxli2123/LoftQ)<br>
   Aligns quantization with LoRA initialization to reduce the error encountered during adaptation.
 
 - **Accurate LoRA-Finetuning Quantization of LLMs via Information Retention (IR-QLoRA)**<br>
+  Haotong Qin, Xudong Ma, Xingyu Zheng, Xiaoyang Li, Yang Zhang, Shouda Liu, Jie Luo, Xianglong Liu, Michele Magno<br>
   *ICML 2024* · `LLM` `PEFT` `Information-Aware` · [Paper](https://proceedings.mlr.press/v235/qin24b.html) [Code](https://github.com/htqin/IR-QLoRA)<br>
   Uses information retention to improve low-bit quantization and LoRA adaptation.
 
 - **L4Q: Parameter Efficient Quantization-Aware Fine-Tuning on Large Language Models**<br>
+  Hyesung Jeon, Yulhwa Kim, Jae-Joon Kim<br>
   *ACL 2025* · `LLM` `PEFT` `QAT` · [Paper](https://aclanthology.org/2025.acl-long.99/)<br>
   Combines parameter-efficient fine-tuning with quantization-aware training.
 
 ### Extreme Low-Bit, Binary and Ternary
 
 - **Forward and Backward Information Retention for Accurate Binary Neural Networks (IR-Net)**<br>
+  Haotong Qin, Ruihao Gong, Xianglong Liu, Mingzhu Shen, Ziran Wei, Fengwei Yu, Jingkuan Song<br>
   *CVPR 2020* · `CNN` `QAT` `Binary` `1-Bit` · [Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Qin_Forward_and_Backward_Information_Retention_for_Accurate_Binary_Neural_Networks_CVPR_2020_paper.pdf) [Code](https://github.com/htqin/IR-Net)<br>
   Retains information in both forward activations and backward gradients when training binary neural networks.
 
 - **BiBERT: Accurate Fully Binarized BERT**<br>
+  Haotong Qin, Yifu Ding, Mingyuan Zhang, Qinghua Yan, Aishan Liu, Qingqing Dang, Ziwei Liu, Xianglong Liu<br>
   *ICLR 2022* · `Transformer` `NLP` `Binary` `Weight + Activation` · [Paper](https://openreview.net/forum?id=5xEgrl_5FAJ) [Code](https://github.com/htqin/BiBERT)<br>
   Targets fully binarized BERT, extending binary networks to transformer language models.
 
 - **BiLLM: Pushing the Limit of Post-Training Quantization for LLMs**<br>
+  Wei Huang, Yangdong Liu, Haotong Qin, Ying Li, Shiming Zhang, Xianglong Liu, Michele Magno, Xiaojuan Qi<br>
   *ICML 2024* · `LLM` `PTQ` `Binary` `Extreme Low-Bit` · [Paper](https://openreview.net/forum?id=qOl2WWOqFg) [Code](https://github.com/Aaronhuang-778/BiLLM)<br>
   Uses saliency-aware binarization to push pretrained LLM weights into the extreme low-bit regime.
 
 - **DB-LLM: Accurate Dual-Binarization for Efficient LLMs**<br>
+  Hong Chen, Chengtao Lv, Liang Ding, Haotong Qin, Xiabin Zhou, Yifu Ding, Xuebo Liu, Min Zhang, Jinyang Guo, Xianglong Liu, Dacheng Tao<br>
   *ACL Findings 2024* · `LLM` `Dual Binarization` `Extreme Low-Bit` · [Paper](https://aclanthology.org/2024.findings-acl.516/)<br>
   Uses dual binarization to compress LLMs while retaining accuracy.
 
 - **ARB-LLM: Alternating Refined Binarizations for Large Language Models**<br>
+  Zhiteng Li, Xianglong Yan, Tianao Zhang, Haotong Qin, Dong Xie, Jiang Tian, Zhongchao Shi, Linghe Kong, Yulun Zhang, Xiaokang Yang<br>
   *ICLR 2025* · `LLM` `Binary` `Extreme Low-Bit` · [Paper](https://openreview.net/forum?id=ZU8OdDLTts) [Code](https://github.com/ZHITENGLI/ARB-LLM)<br>
   Refines alternating binarizations for low-bit LLM representation.
 
 - **PTQ1.61: Push the Real Limit of Extremely Low-Bit Post-Training Quantization Methods for Large Language Models**<br>
+  Jiaqi Zhao, Miao Zhang, Ming Wang, Yuzhang Shang, Kaihao Zhang, Weili Guan, Yaowei Wang, Min Zhang<br>
   *ACL 2025* · `LLM` `PTQ` `Extreme Low-Bit` · [Paper](https://aclanthology.org/2025.acl-long.225/) [Code](https://github.com/zjq0455/PTQ1.61)<br>
   Explores extremely low-bit post-training quantization for LLMs.
 
 - **PT²-LLM: Post-Training Ternarization for Large Language Models**<br>
+  Xianglong Yan, Chengzhu Bao, Zhiteng Li, Tianao Zhang, Kaicheng Yang, Haotong Qin, Ruobing Xie, Xingwu Sun, Yulun Zhang<br>
   *ICLR 2026* · `LLM` `PTQ` `Ternary` · [Paper](https://openreview.net/forum?id=7QZanjCD6M) [Code](https://github.com/XIANGLONGYAN/PT2-LLM)<br>
   Converts pretrained large language models to ternary representations.
 
 ### Vector, Lattice and Codebook Quantization
 
 - **QuIP: 2-Bit Quantization of Large Language Models With Guarantees**<br>
+  Jerry Chee, Yaohui Cai, Volodymyr Kuleshov, Christopher De Sa<br>
   *NeurIPS 2023* · `LLM` `PTQ` `2-Bit` `Incoherence` · [Paper](https://neurips.cc/virtual/2023/poster/69982) [Code](https://github.com/jerry-chee/QuIP)<br>
   Uses incoherence processing for low-bit quantization with guarantees, forming a precursor to the QuIP# lattice-codebook lineage.
 
 - **QuIP#: Even Better LLM Quantization with Hadamard Incoherence and Lattice Codebooks**<br>
+  Albert Tseng, Jerry Chee, Qingyao Sun, Volodymyr Kuleshov, Christopher De Sa<br>
   *ICML 2024* · `LLM` `Lattice` `Codebook` `Hadamard` · [Paper](https://arxiv.org/abs/2402.04396) [Code](https://github.com/Cornell-RelaxML/quip-sharp)<br>
   Combines Hadamard incoherence processing with lattice codebooks for LLM quantization.
 
 - **QTIP: Quantization with Trellises and Incoherence Processing**<br>
+  Albert Tseng, Qingyao Sun, David Hou, Christopher De Sa<br>
   *NeurIPS 2024* · `LLM` `Trellis Coding` `Incoherence` · [Paper](https://arxiv.org/abs/2406.11235) [Code](https://github.com/Cornell-RelaxML/qtip)<br>
   Combines trellis-based quantization with incoherence processing for compact LLM representation.
 
 - **GPTVQ: The Blessing of Dimensionality for LLM Quantization**<br>
+  Mart van Baalen, Andrey Kuzmin, Ivan Koryakovskiy, Markus Nagel, Peter Couperus, Cedric Bastoul, Eric Mahurin, Tijmen Blankevoort, Paul Whatmough<br>
   *arXiv 2024* · `LLM` `Vector Quantization` `Weights` · [Paper](https://arxiv.org/abs/2402.15319) [Code](https://github.com/qualcomm-ai-research/gptvq)<br>
   Exploits joint quantization of multiple weight coordinates rather than coding each weight independently.
 
 - **VPTQ: Extreme Low-bit Vector Post-Training Quantization for Large Language Models**<br>
+  Yifei Liu, Jicheng Wen, Yang Wang, Shengyu Ye, Li Lyna Zhang, Ting Cao, Cheng Li, Mao Yang<br>
   *EMNLP 2024* · `LLM` `PTQ` `Vector Quantization` `Extreme Low-Bit` · [Paper](https://aclanthology.org/2024.emnlp-main.467/)<br>
   Uses vector post-training quantization for extremely low-bit LLM compression.
 
 - **NestQuant: nested lattice quantization for matrix products and LLMs**<br>
+  Semyon Savkin, Eitan Porat, Or Ordentlich, Yury Polyanskiy<br>
   *ICML 2025* · `LLM` `Lattice` `Matrix Products` · [Paper](https://arxiv.org/abs/2502.09720)<br>
   Uses nested lattice quantization for matrix products and LLMs.
 
 - **Learning Grouped Lattice Vector Quantizers for Low-Bit Large Language Models**<br>
+  Xi Zhang, Xiaolin Wu, Jiamang Wang, Weisi Lin<br>
   *NeurIPS 2025* · `LLM` `Grouped Vector Quantization` `Lattice` · [Paper](https://neurips.cc/virtual/2025/poster/117396)<br>
   Learns grouped lattice vector quantizers for low-bit LLM representation.
 
 - **AnyBCQ: Hardware Efficient Flexible Binary-Coded Quantization for Multi-Precision LLMs**<br>
+  Gunho Park, Jeongin Bae, Beomseok Kwon, Byeongwook Kim, Se Jung Kwon, Dongsoo Lee<br>
   *ICLR 2026* · `LLM` `Binary-Coded` `Mixed Precision` `Hardware` · [Paper](https://openreview.net/forum?id=XPIEkFdEDi) [Code](https://github.com/naver-aics/anybcq)<br>
   Develops flexible binary-coded quantization for hardware-efficient multi-precision LLMs.
 
 - **TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate**<br>
+  Amir Zandieh, Majid Daliri, Majid Hadian, Vahab Mirrokni<br>
   *ICLR 2026* · `Vector Quantization` `Online` `Distortion` · [Paper](https://openreview.net/forum?id=tO3ASKZlok)<br>
   Studies online vector quantization with near-optimal distortion rate.
 
 - **RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search**<br>
+  Jianyang Gao, Cheng Long<br>
   *SIGMOD 2024* · `Vector Quantization` `Binary Codes` `Vector Search` · [Paper](https://dl.acm.org/doi/10.1145/3654970) [Code](https://github.com/gaoj0017/RaBitQ)<br>
   Quantizes high-dimensional vectors with a theoretical error bound for approximate nearest-neighbor search.
 
 ### KV Cache Quantization
 
 - **KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache**<br>
+  Zirui Liu, Jiayi Yuan, Hongye Jin, Shaochen Zhong, Zhaozhuo Xu, Vladimir Braverman, Beidi Chen, Xia Hu<br>
   *ICML 2024* · `LLM` `KV Cache` `2-Bit` · [Paper](https://openreview.net/forum?id=L057s2Rq8O) [Code](https://github.com/jy-yuan/KIVI)<br>
   Uses asymmetric, tuning-free 2-bit quantization to compress key and value caches.
 
 - **KVQuant: Towards 10 Million Context Length LLM Inference with KV Cache Quantization**<br>
+  Coleman Hooper, Sehoon Kim, Hiva Mohammadzadeh, Michael Mahoney, Sophia Shao, Kurt Keutzer, Amir Gholami<br>
   *NeurIPS 2024* · `LLM` `KV Cache` `Long Context` · [Paper](https://nips.cc/virtual/2024/poster/96936)<br>
   Targets long-context inference by reducing the memory occupied by the KV cache.
 
 - **ZipCache: Accurate and Efficient KV Cache Quantization with Salient Token Identification**<br>
+  Yefei He, Luoming Zhang, Weijia Wu, Jing Liu, Hong Zhou, Bohan Zhuang<br>
   *NeurIPS 2024* · `LLM` `KV Cache` `Salient Tokens` · [Paper](https://nips.cc/virtual/2024/poster/96563)<br>
   Uses salient-token identification to guide accurate and efficient cache quantization.
 
 - **PM-KVQ: Progressive Mixed-precision KV Cache Quantization for Long-CoT LLMs**<br>
+  Tengxuan Liu, Shiyao Li, Jiayi Yang, Tianchen Zhao, Feng Zhou, Xiaohui Song, Guohao Dai, Shengen Yan, Huazhong Yang, Yu Wang<br>
   *ICLR 2026* · `LLM` `KV Cache` `Mixed Precision` · [Paper](https://arxiv.org/abs/2505.18610) [Code](https://github.com/thu-nics/PM-KVQ)<br>
   Progressively quantizes KV caches with mixed precision for long chain-of-thought inference.
 
 ### Diffusion and Generative Model Quantization
 
 - **Post-training Quantization on Diffusion Models (PTQ4DM)**<br>
+  Yuzhang Shang, Zhihang Yuan, Bin Xie, Bingzhe Wu, Yan Yan<br>
   *CVPR 2023* · `Diffusion` `PTQ` · [Paper](http://openaccess.thecvf.com/content/CVPR2023/html/Shang_Post-Training_Quantization_on_Diffusion_Models_CVPR_2023_paper.html) [Code](https://github.com/42Shawn/PTQ4DM)<br>
   Adapts post-training quantization to diffusion model inference.
 
 - **Q-diffusion: Quantizing Diffusion Models**<br>
+  Xiuyu Li, Yijiang Liu, Long Lian, Huanrui Yang, Zhen Dong, Daniel Kang, Shanghang Zhang, Kurt Keutzer<br>
   *ICCV 2023* · `Diffusion` `PTQ` · [Paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Li_Q-Diffusion_Quantizing_Diffusion_Models_ICCV_2023_paper.pdf) [Code](https://github.com/Xiuyu-Li/q-diffusion)<br>
   Quantizes diffusion models to reduce the cost of iterative generation.
 
 - **PTQD: Accurate Post-Training Quantization for Diffusion Models**<br>
+  Yefei He, Luping Liu, Jing Liu, Weijia Wu, Hong Zhou, Bohan Zhuang<br>
   *NeurIPS 2023* · `Diffusion` `PTQ` `Error Handling` · [Paper](https://neurips.cc/virtual/2023/poster/71314) [Code](https://github.com/ziplab/PTQD)<br>
   Targets accurate diffusion generation through post-training quantization error handling.
 
 - **ViDiT-Q: Efficient and Accurate Quantization of Diffusion Transformers for Image and Video Generation**<br>
+  Tianchen Zhao, Tongcheng Fang, Haofeng Huang, Rui Wan, Widyadewi Soedarmadji, Enshu Liu, Shiyao Li, Zinan Lin, Guohao Dai, Shengen Yan, Huazhong Yang, Xuefei Ning, Yu Wang<br>
   *ICLR 2025* · `Diffusion Transformer` `Image + Video` `Low-Bit` · [Paper](https://iclr.cc/virtual/2025/poster/30429)<br>
   Quantizes diffusion transformers for both image and video generation.
 
 - **SVDQuant: Absorbing Outliers by Low-Rank Component for 4-Bit Diffusion Models**<br>
+  Muyang Li, Yujun Lin, Zhekai Zhang, Tianle Cai, Xiuyu Li, Junxian Guo, Enze Xie, Chenlin Meng, Jun-Yan Zhu, Song Han<br>
   *ICLR 2025* · `Diffusion` `4-Bit` `Low-Rank` · [Paper](https://iclr.cc/virtual/2025/poster/27906)<br>
   Absorbs outliers into a low-rank component to support 4-bit diffusion models.
 
 - **BinaryDM: Accurate Weight Binarization for Efficient Diffusion Models**<br>
+  Xingyu Zheng, Xianglong Liu, Haotong Qin, Xudong Ma, Mingyuan Zhang, Haojie Hao, Jiakai Wang, Zixiang Zhao, Jinyang Guo, Michele Magno<br>
   *ICLR 2025* · `Diffusion` `Binary Weights` · [Paper](https://openreview.net/forum?id=cCE46s1obO) [Code](https://github.com/Xingyu-Zheng/BinaryDM)<br>
   Binarizes diffusion model weights for efficient generation.
 
 - **Q-VDiT: Towards Accurate Quantization and Distillation of Video-Generation Diffusion Transformers**<br>
+  Weilun Feng, Chuanguang Yang, Haotong Qin, Xiangqi Li, Yu Wang, Zhulin An, Libo Huang, Boyu Diao, Zixiang Zhao, Yongjun Xu, Michele Magno<br>
   *ICML 2025* · `Video Diffusion` `Quantization` `Distillation` · [Paper](https://icml.cc/virtual/2025/poster/45429) [Code](https://github.com/cantbebetter2/Q-VDiT)<br>
   Combines quantization and distillation for video-generation diffusion transformers.
 
 - **S²Q-VDiT: Accurate Quantized Video Diffusion Transformer with Salient Data and Sparse Token Distillation**<br>
+  Weilun Feng, Haotong Qin, Chuanguang Yang, Xiangqi Li, Han Yang, Yuqi Li, Zhulin An, Libo Huang, Michele Magno, Yongjun Xu<br>
   *NeurIPS 2025* · `Video Diffusion` `Quantization` `Distillation` · [Paper](https://openreview.net/forum?id=e8pm93koQU) [Code](https://github.com/wlfeng0509/S2Q-VDiT)<br>
   Uses salient data and sparse-token distillation to improve quantized video diffusion transformers.
 
 - **QuantSparse: Comprehensively Compressing Video Diffusion Transformer with Model Quantization and Attention Sparsification**<br>
+  Weilun Feng, Chuanguang Yang, Haotong Qin, Mingqiang Wu, Yuqi Li, Xiangqi Li, Zhulin An, Libo Huang, Yulun Zhang, Michele Magno, Yongjun Xu<br>
   *ICLR 2026* · `Video Diffusion` `Quantization` `Attention Sparsity` · [Paper](https://openreview.net/forum?id=4TAG3aQljJ) [Code](https://github.com/wlfeng0509/QuantSparse)<br>
   Combines model quantization and attention sparsification to compress video diffusion transformers.
 
 ### Vision, Edge and Hardware
 
 - **PTQ4ViT: Post-Training Quantization for Vision Transformers with Twin Uniform Quantization**<br>
+  Zhihang Yuan, Chenhao Xue, Yiqi Chen, Qiang Wu, Guangyu Sun<br>
   *ECCV 2022* · `Vision Transformer` `PTQ` · [Paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136720190.pdf) [Code](https://github.com/hahnyuan/ptq4vit)<br>
   Uses twin uniform quantization to support post-training compression of vision transformers.
 
 - **HAQ: Hardware-Aware Automated Quantization with Mixed Precision**<br>
+  Kuan Wang, Zhijian Liu, Yujun Lin, Ji Lin, Song Han<br>
   *CVPR 2019* · `CNN` `Mixed Precision` `Hardware-Aware` · [Paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Wang_HAQ_Hardware-Aware_Automated_Quantization_With_Mixed_Precision_CVPR_2019_paper.pdf) [Code](https://github.com/mit-han-lab/haq)<br>
   Automates mixed-precision quantization with hardware deployment costs in view.
 
 - **FINN: A Framework for Fast, Scalable Binarized Neural Network Inference**<br>
+  Yaman Umuroglu, Nicholas J. Fraser, Giulio Gambardella, Michaela Blott, Philip Leong, Magnus Jahre, Kees Vissers<br>
   *FPGA 2017* · `Binary Networks` `FPGA` `Inference` · [Paper](https://arxiv.org/abs/1612.07119)<br>
   Provides a framework for fast, scalable binarized neural network inference on FPGA hardware.
 
 - **LUT-GEMM: Quantized Matrix Multiplication based on LUTs for Efficient Inference in Large-Scale Generative Language Models**<br>
+  Gunho Park, Baeseong Park, Minsub Kim, Sungjae Lee, Jeonghoon Kim, Beomseok Kwon, Se Jung Kwon, Byeongwook Kim, Youngjoo Lee, Dongsoo Lee<br>
   *ICLR 2024* · `LLM` `Quantized Matrix Multiplication` `Lookup Tables` · [Paper](https://openreview.net/forum?id=gLARhFLE0F)<br>
   Uses lookup tables for efficient quantized matrix multiplication in generative language models.
 
 ### Low-Precision Training and States
 
 - **8-bit Optimizers via Block-wise Quantization**<br>
+  Tim Dettmers, Mike Lewis, Sam Shleifer, Luke Zettlemoyer<br>
   *ICLR 2022* · `Training` `Optimizer States` `8-Bit` · [Paper](https://openreview.net/forum?id=shpkpVXzo3h) [Code](https://github.com/facebookresearch/bitsandbytes)<br>
   Uses block-wise quantization to reduce optimizer-state memory.
 
 - **ActNN: Reducing Training Memory Footprint via 2-Bit Activation Compressed Training**<br>
+  Jianfei Chen, Lianmin Zheng, Zhewei Yao, Dequan Wang, Ion Stoica, Michael Mahoney, Joseph Gonzalez<br>
   *ICML 2021* · `Training` `Activations` `2-Bit` · [Paper](https://proceedings.mlr.press/v139/chen21z.html) [Code](https://github.com/ucbrise/actnn)<br>
   Compresses saved activations to reduce the memory footprint of neural network training.
 
 - **SDP4Bit: Toward 4-bit Communication Quantization in Sharded Data Parallelism for LLM Training**<br>
+  Jinda Jia, Cong Xie, Hanlin Lu, Daoce Wang, Hao Feng, Chengming Zhang, Baixi Sun, Haibin Lin, Zhi Zhang, Xin Liu, Dingwen Tao<br>
   *NeurIPS 2024* · `LLM Training` `Communication` `4-Bit` · [Paper](https://arxiv.org/abs/2410.15526) [Code](https://github.com/ByteDance-Seed/SDP4Bit)<br>
   Targets 4-bit communication quantization in sharded data-parallel LLM training.
 
@@ -1214,6 +1273,28 @@ All titles and links remain directly in this README, with every year expanded fo
 
 - [Awesome Efficient LLM & Diffusion](https://github.com/efficient-ml/awesome-efficient-llm-diffusion)
 - [Awesome Quantization Papers](https://github.com/Zhen-Dong/Awesome-Quantization-Papers)
+
+## Researcher Homepages
+
+A **non-exhaustive selection** of researchers whose work contributes to model quantization, **listed alphabetically by given name, not ranked**. The list includes researchers at different career stages, in academia and industry, across the Americas, Europe, and Asia. Suggestions for additions and corrections are welcome.
+
+Affiliations and positions were checked in September 2026.
+
+| Name | Institution | Position | Homepage |
+| --- | --- | --- | --- |
+| Christopher De Sa | Cornell University | Associate Professor | [Homepage](https://www.cs.cornell.edu/~cdesa/) |
+| Dan Alistarh | Institute of Science and Technology Austria (ISTA) | Professor | [Homepage](https://daslab.ista.ac.at/) |
+| Guangxuan Xiao | Thinking Machines Lab | Member of Technical Staff | [Homepage](https://guangxuanx.com/) |
+| Haotong Qin | The Hong Kong Polytechnic University | Assistant Professor | [Homepage](https://htqin.github.io/) |
+| Itay Hubara | Stealth startup | Director of AI | [Homepage](https://itayhubara.github.io/) |
+| Jae-Joon Kim | Seoul National University | Professor | [Homepage](https://sites.google.com/site/kimjaejoon) |
+| Kurt Keutzer | University of California, Berkeley | Professor | [Homepage](https://people.eecs.berkeley.edu/~keutzer/Main.htm) |
+| Song Han | Massachusetts Institute of Technology | Associate Professor | [Homepage](https://hanlab.mit.edu/songhan) |
+| Tim Dettmers | Carnegie Mellon University | Assistant Professor | [Homepage](https://timdettmers.com/) |
+| Torsten Hoefler | ETH Zürich | Professor | [Homepage](https://htor.inf.ethz.ch/) |
+| Yulhwa Kim | Sungkyunkwan University | Assistant Professor | [Homepage](https://eic.skku.edu/yulhwa-kim) |
+| Zechun Liu | Meta | Staff Research Scientist | [Homepage](https://zechunliu.com/) |
+| Zhen Dong | NVIDIA | Research Scientist | [Homepage](https://dong-zhen.com/) |
 
 ## Contributing / Scope
 
