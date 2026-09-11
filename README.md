@@ -4,7 +4,7 @@ Awesome Model Quantization is a curated, continuously updated collection of pape
 
 ## Quick Navigation
 
-- [Research Landscape](#research-landscape) — paradigms, representations, transformations, quantized objects, and model families
+- [Research Landscape](#research-landscape) — a quick map of the field
 - [Representative Works](#representative-works) — technical lineages with short descriptions
 - [Benchmarks](#benchmarks) · [Survey Papers](#survey-papers)
 - [Papers by Year](#papers-by-year) — [2026](#2026) · [2025](#2025) · [2024](#2024) · [2023](#2023) · [2022](#2022) · [2021](#2021) · [2020](#2020) · [2019](#2019) · [2018](#2018) · [2017](#2017) · [2016](#2016) · [2015](#2015)
@@ -12,215 +12,302 @@ Awesome Model Quantization is a curated, continuously updated collection of pape
 
 ## Research Landscape
 
-Model quantization represents model parameters, intermediate tensors, or training quantities with fewer bits or a compact set of codes. The dimensions below overlap: a method can combine PTQ, vector codebooks, rotations, and weight-only compression. Bit width alone does not specify its storage overhead, arithmetic precision, or deployment speed.
+Five complementary ways to browse model quantization:
 
-| Dimension | Research map and connections |
-| --- | --- |
-| **Optimization paradigm** | **Post-Training Quantization (PTQ)** converts a pretrained model, often with calibration: GPTQ, SmoothQuant, AWQ, OmniQuant, QuaRot, SpinQuant, FlatQuant, BiLLM. **Quantization-Aware Training (QAT)** models quantization during optimization: PACT, LSQ, IR-Net. **Quantized Fine-Tuning / Parameter-Efficient Fine-Tuning (PEFT)** adapts low-bit models: QLoRA, QA-LoRA, LoftQ, IR-QLoRA, L4Q. **Data-Free / Zero-Shot Quantization** avoids original training data, using model statistics or synthetic samples: ZeroQ, Qimera. **Low-Precision Training** also reduces precision in training computation or stored states: INT8/FP8 training, 8-bit Optimizers. |
-| **Representation / coding structure** | **Scalar quantization** codes individual values; **non-uniform, logarithmic, and floating-point quantization** change the available levels (AdaLog, LLM-FP4). **Vector quantization** jointly codes tuples; **codebook quantization** stores reusable representatives; **product / grouped vector quantization** partitions vectors into groups (GPTVQ, VPTQ, EPQuant). **Lattice quantization** uses structured geometric codebooks (QuIP#, NestQuant, grouped lattice vector quantizers). **Binary-coded quantization** combines binary bases (AnyBCQ); **binary / ternary quantization** constrains values to two / three levels (IR-Net, BiBERT, PT²-LLM). **Mixed precision** allocates different bit widths or formats across tensors or groups (HAWQ, SliM-LLM). |
-| **Transformation / error handling** | **Rotation / orthogonal transforms** redistribute coordinates (QuaRot, SpinQuant); **outlier smoothing / redistribution** balances quantization difficulty (SmoothQuant, AWQ). **Residual / low-rank reconstruction** models remaining errors or outliers (LQER, SVDQuant); **error compensation** corrects quantization effects (GPTQ, First-Order Error Matters). **Saliency-aware / Hessian-aware quantization** uses importance or curvature to guide precision, reconstruction, or rounding (HAWQ, GPTQ, BiLLM). These techniques can accompany scalar or structured coding. |
-| **Quantized object** | **Weights** (GPTQ, AWQ); **activations** (PACT); **weight + activation** (SmoothQuant, BiBERT); **KV cache** (KIVI, KVQuant, ZipCache, PM-KVQ); **training states / optimizer states** (ActNN, 8-bit Optimizers); **gradients / communication** (DoReFa-Net, SDP4Bit). Weight bit width does not imply the same activation, accumulator, or cache precision. |
-| **Model family / deployment** | **CNNs / classical vision** (XNOR-Net, BRECQ); **Vision Transformers** (PTQ4ViT); **Large Language Models** (GPTQ, QLoRA); **multimodal / VLM / VLA** (Q-VLM, MQuant, AutoQVLA); **diffusion / generative models** (PTQ4DM, Q-Diffusion, PTQD, ViDiT-Q, SVDQuant, BinaryDM, Q-VDiT, S²Q-VDiT, QuantSparse); **Mamba / state space models** (Quamba2, SSDi8); **graph / point cloud models** (EPQuant, BiPointNet); **edge / embedded / hardware-oriented systems** (HAQ, FINN, LUT-GEMM). |
+- **How it is optimized** — post-training quantization (PTQ), quantization-aware training (QAT), quantized fine-tuning, data-free methods, and low-precision training.
+- **How values are represented** — scalar, vector/codebook, lattice, binary-coded, binary/ternary, and mixed-precision quantization.
+- **How errors are reduced** — rotations, outlier smoothing, residual reconstruction, error compensation, and sensitivity-aware methods.
+- **What is quantized** — weights, activations, KV caches, training states, gradients, and communication.
+- **Where it is used** — vision, language, multimodal, generative, state space, and graph models, alongside edge and hardware systems.
+
+These dimensions overlap: one method may combine PTQ, rotations, and vector codebooks. Explore the [representative works](#representative-works) below for concrete examples.
+
+<details>
+<summary>Explore the taxonomy and method connections</summary>
+
+**Optimization paradigm**
+
+**Post-Training Quantization (PTQ)** converts a pretrained model, often with calibration: GPTQ, SmoothQuant, AWQ, OmniQuant, QuaRot, SpinQuant, FlatQuant, BiLLM. **Quantization-Aware Training (QAT)** models quantization during optimization: PACT, LSQ, IR-Net. **Quantized Fine-Tuning / Parameter-Efficient Fine-Tuning (PEFT)** adapts low-bit models: QLoRA, QA-LoRA, LoftQ, IR-QLoRA, L4Q. **Data-Free / Zero-Shot Quantization** avoids original training data, using model statistics or synthetic samples: ZeroQ, Qimera. **Low-Precision Training** also reduces precision in training computation or stored states: INT8/FP8 training, 8-bit Optimizers.
+
+**Representation / coding structure**
+
+**Scalar quantization** codes individual values; **non-uniform, logarithmic, and floating-point quantization** change the available levels (AdaLog, LLM-FP4). **Vector quantization** jointly codes tuples; **codebook quantization** stores reusable representatives; **product / grouped vector quantization** partitions vectors into groups (GPTVQ, VPTQ, EPQuant). **Lattice quantization** uses structured geometric codebooks (QuIP#, NestQuant, grouped lattice vector quantizers). **Binary-coded quantization** combines binary bases (AnyBCQ); **binary / ternary quantization** constrains values to two / three levels (IR-Net, BiBERT, PT²-LLM). **Mixed precision** allocates different bit widths or formats across tensors or groups (HAWQ, SliM-LLM).
+
+**Transformation / error handling**
+
+**Rotation / orthogonal transforms** redistribute coordinates (QuaRot, SpinQuant); **outlier smoothing / redistribution** balances quantization difficulty (SmoothQuant, AWQ). **Residual / low-rank reconstruction** models remaining errors or outliers (LQER, SVDQuant); **error compensation** corrects quantization effects (GPTQ, First-Order Error Matters). **Saliency-aware / Hessian-aware quantization** uses importance or curvature to guide precision, reconstruction, or rounding (HAWQ, GPTQ, BiLLM). These techniques can accompany scalar or structured coding.
+
+**Quantized object**
+
+**Weights** (GPTQ, AWQ); **activations** (PACT); **weight + activation** (SmoothQuant, BiBERT); **KV cache** (KIVI, KVQuant, ZipCache, PM-KVQ); **training states / optimizer states** (ActNN, 8-bit Optimizers); **gradients / communication** (DoReFa-Net, SDP4Bit). Weight bit width does not imply the same activation, accumulator, or cache precision.
+
+**Model family / deployment**
+
+**CNNs / classical vision** (XNOR-Net, BRECQ); **Vision Transformers** (PTQ4ViT); **Large Language Models** (GPTQ, QLoRA); **multimodal / VLM / VLA** (Q-VLM, MQuant, AutoQVLA); **diffusion / generative models** (PTQ4DM, Q-Diffusion, PTQD, ViDiT-Q, SVDQuant, BinaryDM, Q-VDiT, S²Q-VDiT, QuantSparse); **Mamba / state space models** (Quamba2, SSDi8); **graph / point cloud models** (EPQuant, BiPointNet); **edge / embedded / hardware-oriented systems** (HAQ, FINN, LUT-GEMM).
 
 For the structured-coding lineage, QuIP introduces incoherence processing for low-bit LLM quantization; QuIP# connects this direction to lattice codebooks, while QTIP uses trellis coding. GPTVQ, VPTQ, and NestQuant explore vector or lattice representations. TurboQuant and RaBitQ are also retained for their vector-quantization methodology; RaBitQ targets approximate nearest-neighbor search rather than LLM weight quantization.
 
+Bit width alone does not specify storage overhead, arithmetic precision, or deployment speed.
+
+</details>
+
 ## Representative Works
 
-Selected entry points into technical lineages, drawn from the collection below; this is not a ranking. Tags describe the method or target, and descriptions emphasize its contribution. Venues, years, and links follow the existing repository metadata; code links appear where already recorded. The [yearly collection](#papers-by-year) remains the full browsing path.
+Selected starting points, grouped by technical lineage. Titles, venues, and links follow the existing collection; code links are included where recorded. Browse [all papers by year](#papers-by-year) for the full list.
 
-[Classical / QAT](#classical-quantization-and-qat) · [Transformer / LLM](#transformer-and-llm-quantization) · [Quantized fine-tuning](#quantized-fine-tuning) · [Extreme low-bit](#extreme-low-bit-binary-and-ternary) · [Vector / lattice / codebook](#vector-lattice-and-codebook-quantization) · [KV cache](#kv-cache-quantization) · [Generative models](#diffusion-and-generative-model-quantization) · [Vision / hardware](#vision-edge-and-hardware) · [Low-precision training](#low-precision-training-and-states)
+- **Foundations:** [Classical / QAT](#classical-quantization-and-qat) · [Extreme low-bit](#extreme-low-bit-binary-and-ternary) · [Vector / lattice / codebook](#vector-lattice-and-codebook-quantization)
+- **Language models:** [Transformer / LLM](#transformer-and-llm-quantization) · [Quantized fine-tuning](#quantized-fine-tuning) · [KV cache](#kv-cache-quantization)
+- **Models and systems:** [Generative models](#diffusion-and-generative-model-quantization) · [Vision / hardware](#vision-edge-and-hardware) · [Low-precision training](#low-precision-training-and-states)
 
 ### Classical Quantization and QAT
 
-- **BinaryConnect: Training Deep Neural Networks with binary weights during propagations** — NeurIPS 2015. `Neural Networks` `QAT` `Binary Weights`
-  Trains neural networks with binary weights during forward and backward propagation. [[Paper](https://arxiv.org/abs/1511.00363)] [[Code](https://github.com/MatthieuCourbariaux/BinaryConnect)]
+- **BinaryConnect: Training Deep Neural Networks with binary weights during propagations**<br>
+  *NeurIPS 2015* · `Neural Networks` `QAT` `Binary Weights` · [Paper](https://arxiv.org/abs/1511.00363) [Code](https://github.com/MatthieuCourbariaux/BinaryConnect)<br>
+  Trains neural networks with binary weights during forward and backward propagation.
 
-- **XNOR-Net: ImageNet Classification Using Binary Convolutional Neural Networks** — ECCV 2016. `CNN` `Binary` `Weight + Activation`
-  Approximates convolutions with binary weights and inputs for efficient CNN inference. [[Paper](https://arxiv.org/abs/1603.05279)] [[Code](https://github.com/allenai/XNOR-Net)]
+- **XNOR-Net: ImageNet Classification Using Binary Convolutional Neural Networks**<br>
+  *ECCV 2016* · `CNN` `Binary` `Weight + Activation` · [Paper](https://arxiv.org/abs/1603.05279) [Code](https://github.com/allenai/XNOR-Net)<br>
+  Approximates convolutions with binary weights and inputs for efficient CNN inference.
 
-- **PACT: Parameterized Clipping Activation for Quantized Neural Networks** — ICLR 2018. `CNN` `QAT` `Activations`
-  Learns activation clipping thresholds to support low-bit network training. [[Paper](https://openreview.net/pdf?id=By5ugjyCb)]
+- **PACT: Parameterized Clipping Activation for Quantized Neural Networks**<br>
+  *ICLR 2018* · `CNN` `QAT` `Activations` · [Paper](https://openreview.net/pdf?id=By5ugjyCb)<br>
+  Learns activation clipping thresholds to support low-bit network training.
 
-- **Learned Step Size Quantization (LSQ)** — ICLR 2020. `QAT` `Low-Bit`
-  Learns quantizer step sizes alongside network parameters. [[Paper](https://arxiv.org/abs/1902.08153)]
+- **Learned Step Size Quantization (LSQ)**<br>
+  *ICLR 2020* · `QAT` `Low-Bit` · [Paper](https://arxiv.org/abs/1902.08153)<br>
+  Learns quantizer step sizes alongside network parameters.
 
-- **Up or Down? Adaptive Rounding for Post-Training Quantization (AdaRound)** — ICML 2020. `PTQ` `Rounding`
-  Optimizes rounding decisions when converting pretrained weights to low precision. [[Paper](https://arxiv.org/abs/2004.10568)]
+- **Up or Down? Adaptive Rounding for Post-Training Quantization (AdaRound)**<br>
+  *ICML 2020* · `PTQ` `Rounding` · [Paper](https://arxiv.org/abs/2004.10568)<br>
+  Optimizes rounding decisions when converting pretrained weights to low precision.
 
-- **BRECQ: Pushing the Limit of Post-Training Quantization by Block Reconstruction** — ICLR 2021. `CNN` `PTQ` `Reconstruction`
-  Uses block reconstruction to reduce post-training quantization error. [[Paper](https://openreview.net/forum?id=POWv6hDd9XH)] [[Code](https://github.com/yhhhli/BRECQ)]
+- **BRECQ: Pushing the Limit of Post-Training Quantization by Block Reconstruction**<br>
+  *ICLR 2021* · `CNN` `PTQ` `Reconstruction` · [Paper](https://openreview.net/forum?id=POWv6hDd9XH) [Code](https://github.com/yhhhli/BRECQ)<br>
+  Uses block reconstruction to reduce post-training quantization error.
 
-- **HAWQ: Hessian AWare Quantization of Neural Networks With Mixed-Precision** — ICCV 2019. `Mixed Precision` `Hessian-Aware`
-  Uses Hessian information to guide mixed-precision neural network quantization. [[Paper](https://openaccess.thecvf.com/content_ICCV_2019/html/Dong_HAWQ_Hessian_AWare_Quantization_of_Neural_Networks_With_Mixed-Precision_ICCV_2019_paper.html)]
+- **HAWQ: Hessian AWare Quantization of Neural Networks With Mixed-Precision**<br>
+  *ICCV 2019* · `Mixed Precision` `Hessian-Aware` · [Paper](https://openaccess.thecvf.com/content_ICCV_2019/html/Dong_HAWQ_Hessian_AWare_Quantization_of_Neural_Networks_With_Mixed-Precision_ICCV_2019_paper.html)<br>
+  Uses Hessian information to guide mixed-precision neural network quantization.
 
-- **HAWQ-V2: Hessian Aware trace-Weighted Quantization of Neural Networks** — NeurIPS 2020. `Mixed Precision` `Hessian-Aware`
-  Develops trace-weighted Hessian sensitivity for mixed-precision allocation. [[Paper](https://proceedings.neurips.cc/paper/2020/hash/d77c703536718b95308130ff2e5cf9ee-Abstract.html)]
+- **HAWQ-V2: Hessian Aware trace-Weighted Quantization of Neural Networks**<br>
+  *NeurIPS 2020* · `Mixed Precision` `Hessian-Aware` · [Paper](https://proceedings.neurips.cc/paper/2020/hash/d77c703536718b95308130ff2e5cf9ee-Abstract.html)<br>
+  Develops trace-weighted Hessian sensitivity for mixed-precision allocation.
 
 ### Transformer and LLM Quantization
 
-- **LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale** — NeurIPS 2022. `Transformer` `INT8` `Mixed Precision`
-  Enables 8-bit matrix multiplication at transformer scale while handling outlier features in higher precision. [[Paper](https://arxiv.org/abs/2208.07339)] [[Code](https://github.com/timdettmers/bitsandbytes)]
+- **LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale**<br>
+  *NeurIPS 2022* · `Transformer` `INT8` `Mixed Precision` · [Paper](https://arxiv.org/abs/2208.07339) [Code](https://github.com/timdettmers/bitsandbytes)<br>
+  Enables 8-bit matrix multiplication at transformer scale while handling outlier features in higher precision.
 
-- **GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers** — ICLR 2023. `LLM` `PTQ` `Weights`
-  Uses approximate second-order information and error compensation for low-bit weight quantization. [[Paper](https://arxiv.org/abs/2210.17323)] [[Code](https://github.com/IST-DASLab/gptq)]
+- **GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers**<br>
+  *ICLR 2023* · `LLM` `PTQ` `Weights` · [Paper](https://arxiv.org/abs/2210.17323) [Code](https://github.com/IST-DASLab/gptq)<br>
+  Uses approximate second-order information and error compensation for low-bit weight quantization.
 
-- **SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models** — ICML 2023. `LLM` `PTQ` `Weight + Activation`
-  Redistributes activation outlier difficulty into weights to enable low-precision matrix multiplication. [[Paper](https://arxiv.org/abs/2211.10438)] [[Code](https://github.com/mit-han-lab/smoothquant)]
+- **SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models**<br>
+  *ICML 2023* · `LLM` `PTQ` `Weight + Activation` · [Paper](https://arxiv.org/abs/2211.10438) [Code](https://github.com/mit-han-lab/smoothquant)<br>
+  Redistributes activation outlier difficulty into weights to enable low-precision matrix multiplication.
 
-- **AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration** — MLSys 2024. `LLM` `PTQ` `Weights` `Saliency-Aware`
-  Uses activation information to guide weight quantization for on-device compression and acceleration. [[Paper](https://proceedings.mlsys.org/paper_files/paper/2024/hash/42a452cbafa9dd64e9ba4aa95cc1ef21-Abstract-Conference.html)] [[Code](https://github.com/mit-han-lab/llm-awq)]
+- **AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration**<br>
+  *MLSys 2024* · `LLM` `PTQ` `Weights` `Saliency-Aware` · [Paper](https://proceedings.mlsys.org/paper_files/paper/2024/hash/42a452cbafa9dd64e9ba4aa95cc1ef21-Abstract-Conference.html) [Code](https://github.com/mit-han-lab/llm-awq)<br>
+  Uses activation information to guide weight quantization for on-device compression and acceleration.
 
-- **OmniQuant: Omnidirectionally Calibrated Quantization for Large Language Models** — ICLR 2024. `LLM` `PTQ` `Calibration`
-  Optimizes clipping and equivalent transformations to calibrate low-bit LLMs. [[Paper](https://openreview.net/forum?id=8Wuvhh0LYW)] [[Code](https://github.com/OpenGVLab/OmniQuant)]
+- **OmniQuant: Omnidirectionally Calibrated Quantization for Large Language Models**<br>
+  *ICLR 2024* · `LLM` `PTQ` `Calibration` · [Paper](https://openreview.net/forum?id=8Wuvhh0LYW) [Code](https://github.com/OpenGVLab/OmniQuant)<br>
+  Optimizes clipping and equivalent transformations to calibrate low-bit LLMs.
 
-- **QuaRot: Outlier-Free 4-Bit Inference in Rotated LLMs** — arXiv 2024. `LLM` `PTQ` `4-Bit` `Rotation`
-  Uses rotations to suppress outliers and enable 4-bit inference. [[Paper](https://arxiv.org/abs/2404.00456)] [[Code](https://github.com/spcl/QuaRot)]
+- **QuaRot: Outlier-Free 4-Bit Inference in Rotated LLMs**<br>
+  *arXiv 2024* · `LLM` `PTQ` `4-Bit` `Rotation` · [Paper](https://arxiv.org/abs/2404.00456) [Code](https://github.com/spcl/QuaRot)<br>
+  Uses rotations to suppress outliers and enable 4-bit inference.
 
-- **SpinQuant: LLM Quantization with Learned Rotations** — ICLR 2025. `LLM` `PTQ` `Learned Rotation`
-  Learns rotations to make LLM representations more amenable to quantization. [[Paper](https://iclr.cc/virtual/2025/poster/28338)]
+- **SpinQuant: LLM Quantization with Learned Rotations**<br>
+  *ICLR 2025* · `LLM` `PTQ` `Learned Rotation` · [Paper](https://iclr.cc/virtual/2025/poster/28338)<br>
+  Learns rotations to make LLM representations more amenable to quantization.
 
-- **FlatQuant: Flatness Matters for LLM Quantization** — ICML 2025. `LLM` `PTQ` `Transformation`
-  Targets distribution flatness to improve LLM quantization. [[Paper](https://proceedings.mlr.press/v267/sun25l.html)] [[Code](https://github.com/ruikangliu/FlatQuant)]
+- **FlatQuant: Flatness Matters for LLM Quantization**<br>
+  *ICML 2025* · `LLM` `PTQ` `Transformation` · [Paper](https://proceedings.mlr.press/v267/sun25l.html) [Code](https://github.com/ruikangliu/FlatQuant)<br>
+  Targets distribution flatness to improve LLM quantization.
 
 ### Quantized Fine-Tuning
 
-- **QLoRA: Efficient Finetuning of Quantized LLMs** — NeurIPS 2023. `LLM` `PEFT` `4-Bit`
-  Fine-tunes low-rank adapters through a frozen 4-bit quantized base model. [[Paper](https://neurips.cc/virtual/2023/poster/71815)] [[Code](https://github.com/artidoro/qlora)]
+- **QLoRA: Efficient Finetuning of Quantized LLMs**<br>
+  *NeurIPS 2023* · `LLM` `PEFT` `4-Bit` · [Paper](https://neurips.cc/virtual/2023/poster/71815) [Code](https://github.com/artidoro/qlora)<br>
+  Fine-tunes low-rank adapters through a frozen 4-bit quantized base model.
 
-- **QA-LoRA: Quantization-Aware Low-Rank Adaptation of Large Language Models** — ICLR 2024. `LLM` `PEFT` `Quantization-Aware`
-  Combines quantization-aware optimization with low-rank adaptation. [[Paper](https://openreview.net/forum?id=WvFoJccpo8)] [[Code](https://github.com/yuhuixu1993/qa-lora)]
+- **QA-LoRA: Quantization-Aware Low-Rank Adaptation of Large Language Models**<br>
+  *ICLR 2024* · `LLM` `PEFT` `Quantization-Aware` · [Paper](https://openreview.net/forum?id=WvFoJccpo8) [Code](https://github.com/yuhuixu1993/qa-lora)<br>
+  Combines quantization-aware optimization with low-rank adaptation.
 
-- **LoftQ: LoRA-Fine-Tuning-aware Quantization for Large Language Models** — ICLR 2024. `LLM` `PEFT` `Low-Bit`
-  Aligns quantization with LoRA initialization to reduce the error encountered during adaptation. [[Paper](https://openreview.net/forum?id=LzPWWPAdY4)] [[Code](https://github.com/yxli2123/LoftQ)]
+- **LoftQ: LoRA-Fine-Tuning-aware Quantization for Large Language Models**<br>
+  *ICLR 2024* · `LLM` `PEFT` `Low-Bit` · [Paper](https://openreview.net/forum?id=LzPWWPAdY4) [Code](https://github.com/yxli2123/LoftQ)<br>
+  Aligns quantization with LoRA initialization to reduce the error encountered during adaptation.
 
-- **Accurate LoRA-Finetuning Quantization of LLMs via Information Retention (IR-QLoRA)** — ICML 2024. `LLM` `PEFT` `Information-Aware`
-  Uses information retention to improve low-bit quantization and LoRA adaptation. [[Paper](https://proceedings.mlr.press/v235/qin24b.html)] [[Code](https://github.com/htqin/IR-QLoRA)]
+- **Accurate LoRA-Finetuning Quantization of LLMs via Information Retention (IR-QLoRA)**<br>
+  *ICML 2024* · `LLM` `PEFT` `Information-Aware` · [Paper](https://proceedings.mlr.press/v235/qin24b.html) [Code](https://github.com/htqin/IR-QLoRA)<br>
+  Uses information retention to improve low-bit quantization and LoRA adaptation.
 
-- **L4Q: Parameter Efficient Quantization-Aware Fine-Tuning on Large Language Models** — ACL 2025. `LLM` `PEFT` `QAT`
-  Combines parameter-efficient fine-tuning with quantization-aware training. [[Paper](https://aclanthology.org/2025.acl-long.99/)]
+- **L4Q: Parameter Efficient Quantization-Aware Fine-Tuning on Large Language Models**<br>
+  *ACL 2025* · `LLM` `PEFT` `QAT` · [Paper](https://aclanthology.org/2025.acl-long.99/)<br>
+  Combines parameter-efficient fine-tuning with quantization-aware training.
 
 ### Extreme Low-Bit, Binary and Ternary
 
-- **Forward and Backward Information Retention for Accurate Binary Neural Networks (IR-Net)** — CVPR 2020. `CNN` `QAT` `Binary` `1-Bit`
-  Retains information in both forward activations and backward gradients when training binary neural networks. [[Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Qin_Forward_and_Backward_Information_Retention_for_Accurate_Binary_Neural_Networks_CVPR_2020_paper.pdf)] [[Code](https://github.com/htqin/IR-Net)]
+- **Forward and Backward Information Retention for Accurate Binary Neural Networks (IR-Net)**<br>
+  *CVPR 2020* · `CNN` `QAT` `Binary` `1-Bit` · [Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Qin_Forward_and_Backward_Information_Retention_for_Accurate_Binary_Neural_Networks_CVPR_2020_paper.pdf) [Code](https://github.com/htqin/IR-Net)<br>
+  Retains information in both forward activations and backward gradients when training binary neural networks.
 
-- **BiBERT: Accurate Fully Binarized BERT** — ICLR 2022. `Transformer` `NLP` `Binary` `Weight + Activation`
-  Targets fully binarized BERT, extending binary networks to transformer language models. [[Paper](https://openreview.net/forum?id=5xEgrl_5FAJ)] [[Code](https://github.com/htqin/BiBERT)]
+- **BiBERT: Accurate Fully Binarized BERT**<br>
+  *ICLR 2022* · `Transformer` `NLP` `Binary` `Weight + Activation` · [Paper](https://openreview.net/forum?id=5xEgrl_5FAJ) [Code](https://github.com/htqin/BiBERT)<br>
+  Targets fully binarized BERT, extending binary networks to transformer language models.
 
-- **BiLLM: Pushing the Limit of Post-Training Quantization for LLMs** — ICML 2024. `LLM` `PTQ` `Binary` `Extreme Low-Bit`
-  Uses saliency-aware binarization to push pretrained LLM weights into the extreme low-bit regime. [[Paper](https://openreview.net/forum?id=qOl2WWOqFg)] [[Code](https://github.com/Aaronhuang-778/BiLLM)]
+- **BiLLM: Pushing the Limit of Post-Training Quantization for LLMs**<br>
+  *ICML 2024* · `LLM` `PTQ` `Binary` `Extreme Low-Bit` · [Paper](https://openreview.net/forum?id=qOl2WWOqFg) [Code](https://github.com/Aaronhuang-778/BiLLM)<br>
+  Uses saliency-aware binarization to push pretrained LLM weights into the extreme low-bit regime.
 
-- **DB-LLM: Accurate Dual-Binarization for Efficient LLMs** — ACL Findings 2024. `LLM` `Dual Binarization` `Extreme Low-Bit`
-  Uses dual binarization to compress LLMs while retaining accuracy. [[Paper](https://aclanthology.org/2024.findings-acl.516/)]
+- **DB-LLM: Accurate Dual-Binarization for Efficient LLMs**<br>
+  *ACL Findings 2024* · `LLM` `Dual Binarization` `Extreme Low-Bit` · [Paper](https://aclanthology.org/2024.findings-acl.516/)<br>
+  Uses dual binarization to compress LLMs while retaining accuracy.
 
-- **ARB-LLM: Alternating Refined Binarizations for Large Language Models** — ICLR 2025. `LLM` `Binary` `Extreme Low-Bit`
-  Refines alternating binarizations for low-bit LLM representation. [[Paper](https://openreview.net/forum?id=ZU8OdDLTts)] [[Code](https://github.com/ZHITENGLI/ARB-LLM)]
+- **ARB-LLM: Alternating Refined Binarizations for Large Language Models**<br>
+  *ICLR 2025* · `LLM` `Binary` `Extreme Low-Bit` · [Paper](https://openreview.net/forum?id=ZU8OdDLTts) [Code](https://github.com/ZHITENGLI/ARB-LLM)<br>
+  Refines alternating binarizations for low-bit LLM representation.
 
-- **PTQ1.61: Push the Real Limit of Extremely Low-Bit Post-Training Quantization Methods for Large Language Models** — ACL 2025. `LLM` `PTQ` `Extreme Low-Bit`
-  Explores extremely low-bit post-training quantization for LLMs. [[Paper](https://aclanthology.org/2025.acl-long.225/)] [[Code](https://github.com/zjq0455/PTQ1.61)]
+- **PTQ1.61: Push the Real Limit of Extremely Low-Bit Post-Training Quantization Methods for Large Language Models**<br>
+  *ACL 2025* · `LLM` `PTQ` `Extreme Low-Bit` · [Paper](https://aclanthology.org/2025.acl-long.225/) [Code](https://github.com/zjq0455/PTQ1.61)<br>
+  Explores extremely low-bit post-training quantization for LLMs.
 
-- **PT²-LLM: Post-Training Ternarization for Large Language Models** — ICLR 2026. `LLM` `PTQ` `Ternary`
-  Converts pretrained large language models to ternary representations. [[Paper](https://openreview.net/forum?id=7QZanjCD6M)] [[Code](https://github.com/XIANGLONGYAN/PT2-LLM)]
+- **PT²-LLM: Post-Training Ternarization for Large Language Models**<br>
+  *ICLR 2026* · `LLM` `PTQ` `Ternary` · [Paper](https://openreview.net/forum?id=7QZanjCD6M) [Code](https://github.com/XIANGLONGYAN/PT2-LLM)<br>
+  Converts pretrained large language models to ternary representations.
 
 ### Vector, Lattice and Codebook Quantization
 
-- **QuIP: 2-Bit Quantization of Large Language Models With Guarantees** — NeurIPS 2023. `LLM` `PTQ` `2-Bit` `Incoherence`
-  Uses incoherence processing for low-bit quantization with guarantees, forming a precursor to the QuIP# lattice-codebook lineage. [[Paper](https://neurips.cc/virtual/2023/poster/69982)] [[Code](https://github.com/jerry-chee/QuIP)]
+- **QuIP: 2-Bit Quantization of Large Language Models With Guarantees**<br>
+  *NeurIPS 2023* · `LLM` `PTQ` `2-Bit` `Incoherence` · [Paper](https://neurips.cc/virtual/2023/poster/69982) [Code](https://github.com/jerry-chee/QuIP)<br>
+  Uses incoherence processing for low-bit quantization with guarantees, forming a precursor to the QuIP# lattice-codebook lineage.
 
-- **QuIP#: Even Better LLM Quantization with Hadamard Incoherence and Lattice Codebooks** — ICML 2024. `LLM` `Lattice` `Codebook` `Hadamard`
-  Combines Hadamard incoherence processing with lattice codebooks for LLM quantization. [[Paper](https://arxiv.org/abs/2402.04396)] [[Code](https://github.com/Cornell-RelaxML/quip-sharp)]
+- **QuIP#: Even Better LLM Quantization with Hadamard Incoherence and Lattice Codebooks**<br>
+  *ICML 2024* · `LLM` `Lattice` `Codebook` `Hadamard` · [Paper](https://arxiv.org/abs/2402.04396) [Code](https://github.com/Cornell-RelaxML/quip-sharp)<br>
+  Combines Hadamard incoherence processing with lattice codebooks for LLM quantization.
 
-- **QTIP: Quantization with Trellises and Incoherence Processing** — NeurIPS 2024. `LLM` `Trellis Coding` `Incoherence`
-  Combines trellis-based quantization with incoherence processing for compact LLM representation. [[Paper](https://arxiv.org/abs/2406.11235)] [[Code](https://github.com/Cornell-RelaxML/qtip)]
+- **QTIP: Quantization with Trellises and Incoherence Processing**<br>
+  *NeurIPS 2024* · `LLM` `Trellis Coding` `Incoherence` · [Paper](https://arxiv.org/abs/2406.11235) [Code](https://github.com/Cornell-RelaxML/qtip)<br>
+  Combines trellis-based quantization with incoherence processing for compact LLM representation.
 
-- **GPTVQ: The Blessing of Dimensionality for LLM Quantization** — arXiv 2024. `LLM` `Vector Quantization` `Weights`
-  Exploits joint quantization of multiple weight coordinates rather than coding each weight independently. [[Paper](https://arxiv.org/abs/2402.15319)] [[Code](https://github.com/qualcomm-ai-research/gptvq)]
+- **GPTVQ: The Blessing of Dimensionality for LLM Quantization**<br>
+  *arXiv 2024* · `LLM` `Vector Quantization` `Weights` · [Paper](https://arxiv.org/abs/2402.15319) [Code](https://github.com/qualcomm-ai-research/gptvq)<br>
+  Exploits joint quantization of multiple weight coordinates rather than coding each weight independently.
 
-- **VPTQ: Extreme Low-bit Vector Post-Training Quantization for Large Language Models** — EMNLP 2024. `LLM` `PTQ` `Vector Quantization` `Extreme Low-Bit`
-  Uses vector post-training quantization for extremely low-bit LLM compression. [[Paper](https://aclanthology.org/2024.emnlp-main.467/)]
+- **VPTQ: Extreme Low-bit Vector Post-Training Quantization for Large Language Models**<br>
+  *EMNLP 2024* · `LLM` `PTQ` `Vector Quantization` `Extreme Low-Bit` · [Paper](https://aclanthology.org/2024.emnlp-main.467/)<br>
+  Uses vector post-training quantization for extremely low-bit LLM compression.
 
-- **NestQuant: nested lattice quantization for matrix products and LLMs** — ICML 2025. `LLM` `Lattice` `Matrix Products`
-  Uses nested lattice quantization for matrix products and LLMs. [[Paper](https://arxiv.org/abs/2502.09720)]
+- **NestQuant: nested lattice quantization for matrix products and LLMs**<br>
+  *ICML 2025* · `LLM` `Lattice` `Matrix Products` · [Paper](https://arxiv.org/abs/2502.09720)<br>
+  Uses nested lattice quantization for matrix products and LLMs.
 
-- **Learning Grouped Lattice Vector Quantizers for Low-Bit Large Language Models** — NeurIPS 2025. `LLM` `Grouped Vector Quantization` `Lattice`
-  Learns grouped lattice vector quantizers for low-bit LLM representation. [[Paper](https://neurips.cc/virtual/2025/poster/117396)]
+- **Learning Grouped Lattice Vector Quantizers for Low-Bit Large Language Models**<br>
+  *NeurIPS 2025* · `LLM` `Grouped Vector Quantization` `Lattice` · [Paper](https://neurips.cc/virtual/2025/poster/117396)<br>
+  Learns grouped lattice vector quantizers for low-bit LLM representation.
 
-- **AnyBCQ: Hardware Efficient Flexible Binary-Coded Quantization for Multi-Precision LLMs** — ICLR 2026. `LLM` `Binary-Coded` `Mixed Precision` `Hardware`
-  Develops flexible binary-coded quantization for hardware-efficient multi-precision LLMs. [[Paper](https://openreview.net/forum?id=XPIEkFdEDi)] [[Code](https://github.com/naver-aics/anybcq)]
+- **AnyBCQ: Hardware Efficient Flexible Binary-Coded Quantization for Multi-Precision LLMs**<br>
+  *ICLR 2026* · `LLM` `Binary-Coded` `Mixed Precision` `Hardware` · [Paper](https://openreview.net/forum?id=XPIEkFdEDi) [Code](https://github.com/naver-aics/anybcq)<br>
+  Develops flexible binary-coded quantization for hardware-efficient multi-precision LLMs.
 
-- **TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate** — ICLR 2026. `Vector Quantization` `Online` `Distortion`
-  Studies online vector quantization with near-optimal distortion rate. [[Paper](https://openreview.net/forum?id=tO3ASKZlok)]
+- **TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate**<br>
+  *ICLR 2026* · `Vector Quantization` `Online` `Distortion` · [Paper](https://openreview.net/forum?id=tO3ASKZlok)<br>
+  Studies online vector quantization with near-optimal distortion rate.
 
-- **RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search** — SIGMOD 2024. `Vector Quantization` `Binary Codes` `Vector Search`
-  Quantizes high-dimensional vectors with a theoretical error bound for approximate nearest-neighbor search. [[Paper](https://dl.acm.org/doi/10.1145/3654970)] [[Code](https://github.com/gaoj0017/RaBitQ)]
+- **RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search**<br>
+  *SIGMOD 2024* · `Vector Quantization` `Binary Codes` `Vector Search` · [Paper](https://dl.acm.org/doi/10.1145/3654970) [Code](https://github.com/gaoj0017/RaBitQ)<br>
+  Quantizes high-dimensional vectors with a theoretical error bound for approximate nearest-neighbor search.
 
 ### KV Cache Quantization
 
-- **KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache** — ICML 2024. `LLM` `KV Cache` `2-Bit`
-  Uses asymmetric, tuning-free 2-bit quantization to compress key and value caches. [[Paper](https://openreview.net/forum?id=L057s2Rq8O)] [[Code](https://github.com/jy-yuan/KIVI)]
+- **KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache**<br>
+  *ICML 2024* · `LLM` `KV Cache` `2-Bit` · [Paper](https://openreview.net/forum?id=L057s2Rq8O) [Code](https://github.com/jy-yuan/KIVI)<br>
+  Uses asymmetric, tuning-free 2-bit quantization to compress key and value caches.
 
-- **KVQuant: Towards 10 Million Context Length LLM Inference with KV Cache Quantization** — NeurIPS 2024. `LLM` `KV Cache` `Long Context`
-  Targets long-context inference by reducing the memory occupied by the KV cache. [[Paper](https://nips.cc/virtual/2024/poster/96936)]
+- **KVQuant: Towards 10 Million Context Length LLM Inference with KV Cache Quantization**<br>
+  *NeurIPS 2024* · `LLM` `KV Cache` `Long Context` · [Paper](https://nips.cc/virtual/2024/poster/96936)<br>
+  Targets long-context inference by reducing the memory occupied by the KV cache.
 
-- **ZipCache: Accurate and Efficient KV Cache Quantization with Salient Token Identification** — NeurIPS 2024. `LLM` `KV Cache` `Salient Tokens`
-  Uses salient-token identification to guide accurate and efficient cache quantization. [[Paper](https://nips.cc/virtual/2024/poster/96563)]
+- **ZipCache: Accurate and Efficient KV Cache Quantization with Salient Token Identification**<br>
+  *NeurIPS 2024* · `LLM` `KV Cache` `Salient Tokens` · [Paper](https://nips.cc/virtual/2024/poster/96563)<br>
+  Uses salient-token identification to guide accurate and efficient cache quantization.
 
-- **PM-KVQ: Progressive Mixed-precision KV Cache Quantization for Long-CoT LLMs** — ICLR 2026. `LLM` `KV Cache` `Mixed Precision`
-  Progressively quantizes KV caches with mixed precision for long chain-of-thought inference. [[Paper](https://arxiv.org/abs/2505.18610)] [[Code](https://github.com/thu-nics/PM-KVQ)]
+- **PM-KVQ: Progressive Mixed-precision KV Cache Quantization for Long-CoT LLMs**<br>
+  *ICLR 2026* · `LLM` `KV Cache` `Mixed Precision` · [Paper](https://arxiv.org/abs/2505.18610) [Code](https://github.com/thu-nics/PM-KVQ)<br>
+  Progressively quantizes KV caches with mixed precision for long chain-of-thought inference.
 
 ### Diffusion and Generative Model Quantization
 
-- **Post-training Quantization on Diffusion Models (PTQ4DM)** — CVPR 2023. `Diffusion` `PTQ`
-  Adapts post-training quantization to diffusion model inference. [[Paper](http://openaccess.thecvf.com/content/CVPR2023/html/Shang_Post-Training_Quantization_on_Diffusion_Models_CVPR_2023_paper.html)] [[Code](https://github.com/42Shawn/PTQ4DM)]
+- **Post-training Quantization on Diffusion Models (PTQ4DM)**<br>
+  *CVPR 2023* · `Diffusion` `PTQ` · [Paper](http://openaccess.thecvf.com/content/CVPR2023/html/Shang_Post-Training_Quantization_on_Diffusion_Models_CVPR_2023_paper.html) [Code](https://github.com/42Shawn/PTQ4DM)<br>
+  Adapts post-training quantization to diffusion model inference.
 
-- **Q-diffusion: Quantizing Diffusion Models** — ICCV 2023. `Diffusion` `PTQ`
-  Quantizes diffusion models to reduce the cost of iterative generation. [[Paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Li_Q-Diffusion_Quantizing_Diffusion_Models_ICCV_2023_paper.pdf)] [[Code](https://github.com/Xiuyu-Li/q-diffusion)]
+- **Q-diffusion: Quantizing Diffusion Models**<br>
+  *ICCV 2023* · `Diffusion` `PTQ` · [Paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Li_Q-Diffusion_Quantizing_Diffusion_Models_ICCV_2023_paper.pdf) [Code](https://github.com/Xiuyu-Li/q-diffusion)<br>
+  Quantizes diffusion models to reduce the cost of iterative generation.
 
-- **PTQD: Accurate Post-Training Quantization for Diffusion Models** — NeurIPS 2023. `Diffusion` `PTQ` `Error Handling`
-  Targets accurate diffusion generation through post-training quantization error handling. [[Paper](https://neurips.cc/virtual/2023/poster/71314)] [[Code](https://github.com/ziplab/PTQD)]
+- **PTQD: Accurate Post-Training Quantization for Diffusion Models**<br>
+  *NeurIPS 2023* · `Diffusion` `PTQ` `Error Handling` · [Paper](https://neurips.cc/virtual/2023/poster/71314) [Code](https://github.com/ziplab/PTQD)<br>
+  Targets accurate diffusion generation through post-training quantization error handling.
 
-- **ViDiT-Q: Efficient and Accurate Quantization of Diffusion Transformers for Image and Video Generation** — ICLR 2025. `Diffusion Transformer` `Image + Video` `Low-Bit`
-  Quantizes diffusion transformers for both image and video generation. [[Paper](https://iclr.cc/virtual/2025/poster/30429)]
+- **ViDiT-Q: Efficient and Accurate Quantization of Diffusion Transformers for Image and Video Generation**<br>
+  *ICLR 2025* · `Diffusion Transformer` `Image + Video` `Low-Bit` · [Paper](https://iclr.cc/virtual/2025/poster/30429)<br>
+  Quantizes diffusion transformers for both image and video generation.
 
-- **SVDQuant: Absorbing Outliers by Low-Rank Component for 4-Bit Diffusion Models** — ICLR 2025. `Diffusion` `4-Bit` `Low-Rank`
-  Absorbs outliers into a low-rank component to support 4-bit diffusion models. [[Paper](https://iclr.cc/virtual/2025/poster/27906)]
+- **SVDQuant: Absorbing Outliers by Low-Rank Component for 4-Bit Diffusion Models**<br>
+  *ICLR 2025* · `Diffusion` `4-Bit` `Low-Rank` · [Paper](https://iclr.cc/virtual/2025/poster/27906)<br>
+  Absorbs outliers into a low-rank component to support 4-bit diffusion models.
 
-- **BinaryDM: Accurate Weight Binarization for Efficient Diffusion Models** — ICLR 2025. `Diffusion` `Binary Weights`
-  Binarizes diffusion model weights for efficient generation. [[Paper](https://openreview.net/forum?id=cCE46s1obO)] [[Code](https://github.com/Xingyu-Zheng/BinaryDM)]
+- **BinaryDM: Accurate Weight Binarization for Efficient Diffusion Models**<br>
+  *ICLR 2025* · `Diffusion` `Binary Weights` · [Paper](https://openreview.net/forum?id=cCE46s1obO) [Code](https://github.com/Xingyu-Zheng/BinaryDM)<br>
+  Binarizes diffusion model weights for efficient generation.
 
-- **Q-VDiT: Towards Accurate Quantization and Distillation of Video-Generation Diffusion Transformers** — ICML 2025. `Video Diffusion` `Quantization` `Distillation`
-  Combines quantization and distillation for video-generation diffusion transformers. [[Paper](https://icml.cc/virtual/2025/poster/45429)] [[Code](https://github.com/cantbebetter2/Q-VDiT)]
+- **Q-VDiT: Towards Accurate Quantization and Distillation of Video-Generation Diffusion Transformers**<br>
+  *ICML 2025* · `Video Diffusion` `Quantization` `Distillation` · [Paper](https://icml.cc/virtual/2025/poster/45429) [Code](https://github.com/cantbebetter2/Q-VDiT)<br>
+  Combines quantization and distillation for video-generation diffusion transformers.
 
-- **S²Q-VDiT: Accurate Quantized Video Diffusion Transformer with Salient Data and Sparse Token Distillation** — NeurIPS 2025. `Video Diffusion` `Quantization` `Distillation`
-  Uses salient data and sparse-token distillation to improve quantized video diffusion transformers. [[Paper](https://openreview.net/forum?id=e8pm93koQU)] [[Code](https://github.com/wlfeng0509/S2Q-VDiT)]
+- **S²Q-VDiT: Accurate Quantized Video Diffusion Transformer with Salient Data and Sparse Token Distillation**<br>
+  *NeurIPS 2025* · `Video Diffusion` `Quantization` `Distillation` · [Paper](https://openreview.net/forum?id=e8pm93koQU) [Code](https://github.com/wlfeng0509/S2Q-VDiT)<br>
+  Uses salient data and sparse-token distillation to improve quantized video diffusion transformers.
 
-- **QuantSparse: Comprehensively Compressing Video Diffusion Transformer with Model Quantization and Attention Sparsification** — ICLR 2026. `Video Diffusion` `Quantization` `Attention Sparsity`
-  Combines model quantization and attention sparsification to compress video diffusion transformers. [[Paper](https://openreview.net/forum?id=4TAG3aQljJ)] [[Code](https://github.com/wlfeng0509/QuantSparse)]
+- **QuantSparse: Comprehensively Compressing Video Diffusion Transformer with Model Quantization and Attention Sparsification**<br>
+  *ICLR 2026* · `Video Diffusion` `Quantization` `Attention Sparsity` · [Paper](https://openreview.net/forum?id=4TAG3aQljJ) [Code](https://github.com/wlfeng0509/QuantSparse)<br>
+  Combines model quantization and attention sparsification to compress video diffusion transformers.
 
 ### Vision, Edge and Hardware
 
-- **PTQ4ViT: Post-Training Quantization for Vision Transformers with Twin Uniform Quantization** — ECCV 2022. `Vision Transformer` `PTQ`
-  Uses twin uniform quantization to support post-training compression of vision transformers. [[Paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136720190.pdf)] [[Code](https://github.com/hahnyuan/ptq4vit)]
+- **PTQ4ViT: Post-Training Quantization for Vision Transformers with Twin Uniform Quantization**<br>
+  *ECCV 2022* · `Vision Transformer` `PTQ` · [Paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136720190.pdf) [Code](https://github.com/hahnyuan/ptq4vit)<br>
+  Uses twin uniform quantization to support post-training compression of vision transformers.
 
-- **HAQ: Hardware-Aware Automated Quantization with Mixed Precision** — CVPR 2019. `CNN` `Mixed Precision` `Hardware-Aware`
-  Automates mixed-precision quantization with hardware deployment costs in view. [[Paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Wang_HAQ_Hardware-Aware_Automated_Quantization_With_Mixed_Precision_CVPR_2019_paper.pdf)] [[Code](https://github.com/mit-han-lab/haq)]
+- **HAQ: Hardware-Aware Automated Quantization with Mixed Precision**<br>
+  *CVPR 2019* · `CNN` `Mixed Precision` `Hardware-Aware` · [Paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Wang_HAQ_Hardware-Aware_Automated_Quantization_With_Mixed_Precision_CVPR_2019_paper.pdf) [Code](https://github.com/mit-han-lab/haq)<br>
+  Automates mixed-precision quantization with hardware deployment costs in view.
 
-- **FINN: A Framework for Fast, Scalable Binarized Neural Network Inference** — FPGA 2017. `Binary Networks` `FPGA` `Inference`
-  Provides a framework for fast, scalable binarized neural network inference on FPGA hardware. [[Paper](https://arxiv.org/abs/1612.07119)]
+- **FINN: A Framework for Fast, Scalable Binarized Neural Network Inference**<br>
+  *FPGA 2017* · `Binary Networks` `FPGA` `Inference` · [Paper](https://arxiv.org/abs/1612.07119)<br>
+  Provides a framework for fast, scalable binarized neural network inference on FPGA hardware.
 
-- **LUT-GEMM: Quantized Matrix Multiplication based on LUTs for Efficient Inference in Large-Scale Generative Language Models** — ICLR 2024. `LLM` `Quantized Matrix Multiplication` `Lookup Tables`
-  Uses lookup tables for efficient quantized matrix multiplication in generative language models. [[Paper](https://openreview.net/forum?id=gLARhFLE0F)]
+- **LUT-GEMM: Quantized Matrix Multiplication based on LUTs for Efficient Inference in Large-Scale Generative Language Models**<br>
+  *ICLR 2024* · `LLM` `Quantized Matrix Multiplication` `Lookup Tables` · [Paper](https://openreview.net/forum?id=gLARhFLE0F)<br>
+  Uses lookup tables for efficient quantized matrix multiplication in generative language models.
 
 ### Low-Precision Training and States
 
-- **8-bit Optimizers via Block-wise Quantization** — ICLR 2022. `Training` `Optimizer States` `8-Bit`
-  Uses block-wise quantization to reduce optimizer-state memory. [[Paper](https://openreview.net/forum?id=shpkpVXzo3h)] [[Code](https://github.com/facebookresearch/bitsandbytes)]
+- **8-bit Optimizers via Block-wise Quantization**<br>
+  *ICLR 2022* · `Training` `Optimizer States` `8-Bit` · [Paper](https://openreview.net/forum?id=shpkpVXzo3h) [Code](https://github.com/facebookresearch/bitsandbytes)<br>
+  Uses block-wise quantization to reduce optimizer-state memory.
 
-- **ActNN: Reducing Training Memory Footprint via 2-Bit Activation Compressed Training** — ICML 2021. `Training` `Activations` `2-Bit`
-  Compresses saved activations to reduce the memory footprint of neural network training. [[Paper](https://proceedings.mlr.press/v139/chen21z.html)] [[Code](https://github.com/ucbrise/actnn)]
+- **ActNN: Reducing Training Memory Footprint via 2-Bit Activation Compressed Training**<br>
+  *ICML 2021* · `Training` `Activations` `2-Bit` · [Paper](https://proceedings.mlr.press/v139/chen21z.html) [Code](https://github.com/ucbrise/actnn)<br>
+  Compresses saved activations to reduce the memory footprint of neural network training.
 
-- **SDP4Bit: Toward 4-bit Communication Quantization in Sharded Data Parallelism for LLM Training** — NeurIPS 2024. `LLM Training` `Communication` `4-Bit`
-  Targets 4-bit communication quantization in sharded data-parallel LLM training. [[Paper](https://arxiv.org/abs/2410.15526)] [[Code](https://github.com/ByteDance-Seed/SDP4Bit)]
+- **SDP4Bit: Toward 4-bit Communication Quantization in Sharded Data Parallelism for LLM Training**<br>
+  *NeurIPS 2024* · `LLM Training` `Communication` `4-Bit` · [Paper](https://arxiv.org/abs/2410.15526) [Code](https://github.com/ByteDance-Seed/SDP4Bit)<br>
+  Targets 4-bit communication quantization in sharded data-parallel LLM training.
 
 ## Benchmarks
 
