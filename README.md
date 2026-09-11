@@ -135,6 +135,16 @@ These methods replace access to the original dataset with model statistics or ge
   *CVPR 2020* · `CNN` `Data-Free` `Mixed Precision` · [Paper](https://arxiv.org/abs/2001.00281) · [Code](https://github.com/amirgholami/ZeroQ) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22ZeroQ%3A%20A%20Novel%20Zero%20Shot%20Quantization%20Framework%22) [![GitHub stars](https://img.shields.io/github/stars/amirgholami/ZeroQ?style=flat&label=stars&color=555)](https://github.com/amirgholami/ZeroQ)<br>
   Synthesizes calibration inputs from batch-normalization statistics to quantize without the original training dataset.
 
+- **Diversifying Sample Generation for Accurate Data-Free Quantization**<br>
+  Xiangguo Zhang, Haotong Qin, Yifu Ding, Ruihao Gong, Qinghua Yan, Renshuai Tao, Yuhang Li, Fengwei Yu, Xianglong Liu<br>
+  *CVPR 2021* · Oral · `CNN` `Data-Free` `Synthetic Data` `PTQ` · [Paper](https://arxiv.org/abs/2103.01049) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Diversifying%20Sample%20Generation%20for%20Accurate%20Data-Free%20Quantization%22)<br>
+  Relaxes batch-normalization statistic matching and varies layer-wise emphasis to diversify synthetic calibration samples for data-free quantization.
+
+- **Diverse Sample Generation: Pushing the Limit of Generative Data-Free Quantization**<br>
+  Haotong Qin, Yifu Ding, Xiangguo Zhang, Jiakai Wang, Xianglong Liu, Jiwen Lu<br>
+  *IEEE TPAMI 2023* · `CNN` `Data-Free` `PTQ + QAT` `Sample Diversity` · [Paper](https://doi.org/10.1109/TPAMI.2023.3272925) · [Code](https://github.com/htqin/DSG) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Diverse%20Sample%20Generation%3A%20Pushing%20the%20Limit%20of%20Generative%20Data-Free%20Quantization%22) [![GitHub stars](https://img.shields.io/github/stars/htqin/DSG?style=flat&label=stars&color=555)](https://github.com/htqin/DSG)<br>
+  Extends the CVPR 2021 DSG method with theoretical analysis and inter-sample decorrelation, improving synthetic-data generation for both PTQ and QAT.
+
 - **LLM-QAT: Data-Free Quantization Aware Training for Large Language Models**<br>
   Zechun Liu, Barlas Oguz, Changsheng Zhao, Ernie Chang, Pierre Stock, Yashar Mehdad, Yangyang Shi, Raghuraman Krishnamoorthi, Vikas Chandra<br>
   *ACL Findings 2024* · `LLM` `QAT` `Data-Free` `KV Cache` · [Paper](https://aclanthology.org/2024.findings-acl.26/) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22LLM-QAT%3A%20Data-Free%20Quantization%20Aware%20Training%20for%20Large%20Language%20Models%22)<br>
@@ -452,10 +462,20 @@ Vision methods and deployment systems connect quantizer design to integer kernel
   *CVPR 2019* · `CNN` `Mixed Precision` `Hardware-Aware` · [Paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Wang_HAQ_Hardware-Aware_Automated_Quantization_With_Mixed_Precision_CVPR_2019_paper.pdf) · [Code](https://github.com/mit-han-lab/haq) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22HAQ%3A%20Hardware-Aware%20Automated%20Quantization%20with%20Mixed%20Precision%22) [![GitHub stars](https://img.shields.io/github/stars/mit-han-lab/haq?style=flat&label=stars&color=555)](https://github.com/mit-han-lab/haq)<br>
   Automates mixed-precision quantization with hardware deployment costs in view.
 
+- **BiPointNet: Binary Neural Network for Point Clouds**<br>
+  Haotong Qin, Zhongang Cai, Mingyuan Zhang, Yifu Ding, Haiyu Zhao, Shuai Yi, Xianglong Liu, Hao Su<br>
+  *ICLR 2021* · `Point Clouds` `Binary` `QAT` `1-Bit` · [Paper](https://openreview.net/forum?id=9QLRCVysdlO) · [Code](https://github.com/htqin/BiPointNet) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22BiPointNet%3A%20Binary%20Neural%20Network%20for%20Point%20Clouds%22) [![GitHub stars](https://img.shields.io/github/stars/htqin/BiPointNet?style=flat&label=stars&color=555)](https://github.com/htqin/BiPointNet)<br>
+  Uses entropy-maximizing aggregation and layer-wise scale recovery to address feature homogenization and scale distortion in binary point-cloud networks.
+
 - **PTQ4ViT: Post-Training Quantization for Vision Transformers with Twin Uniform Quantization**<br>
   Zhihang Yuan, Chenhao Xue, Yiqi Chen, Qiang Wu, Guangyu Sun<br>
   *ECCV 2022* · `Vision Transformer` `PTQ` · [Paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136720190.pdf) · [Code](https://github.com/hahnyuan/ptq4vit) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22PTQ4ViT%3A%20Post-Training%20Quantization%20for%20Vision%20Transformers%20with%20Twin%20Uniform%20Quantization%22) [![GitHub stars](https://img.shields.io/github/stars/hahnyuan/ptq4vit?style=flat&label=stars&color=555)](https://github.com/hahnyuan/ptq4vit)<br>
   Uses twin uniform quantization to support post-training compression of vision transformers.
+
+- **QuantSR: Accurate Low-bit Quantization for Efficient Image Super-Resolution**<br>
+  Haotong Qin, Yulun Zhang, Yifu Ding, Yifan Liu, Xianglong Liu, Martin Danelljan, Fisher Yu<br>
+  *NeurIPS 2023* · `Super-Resolution` `QAT` `2–4 Bit` · [Paper](https://neurips.cc/virtual/2023/poster/72890) · [Code](https://github.com/htqin/QuantSR) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22QuantSR%3A%20Accurate%20Low-bit%20Quantization%20for%20Efficient%20Image%20Super-Resolution%22) [![GitHub stars](https://img.shields.io/github/stars/htqin/QuantSR?style=flat&label=stars&color=555)](https://github.com/htqin/QuantSR)<br>
+  Combines a redistribution-driven learnable quantizer with a depth-dynamic architecture for accurate low-bit image super-resolution.
 
 - **LUT-GEMM: Quantized Matrix Multiplication based on LUTs for Efficient Inference in Large-Scale Generative Language Models**<br>
   Gunho Park, Baeseong Park, Minsub Kim, Sungjae Lee, Jeonghoon Kim, Beomseok Kwon, Se Jung Kwon, Byeongwook Kim, Youngjoo Lee, Dongsoo Lee<br>
@@ -1073,7 +1093,7 @@ All paper titles and links are kept in this README. Published work is grouped by
 - [[IJCV](https://arxiv.org/abs/2109.12338)] Distribution-sensitive Information Retention for Accurate Binary Neural Network
 - [[NeurIPS](https://neurips.cc/virtual/2023/poster/71287)] BiMatting: Efficient Video Matting via Binarization [[code](https://github.com/htqin/BiMatting)] [![GitHub stars](https://img.shields.io/github/stars/htqin/BiMatting?style=social)](https://github.com/htqin/BiMatting)
 - [[NeurIPS](https://neurips.cc/virtual/2023/poster/72890)] QuantSR: Accurate Low-bit Quantization for Efficient Image Super-Resolution [[code](https://github.com/htqin/QuantSR)] [![GitHub stars](https://img.shields.io/github/stars/htqin/QuantSR?style=social)](https://github.com/htqin/QuantSR)
-- [[TPAMI](https://ieeexplore.ieee.org/document/10146917)] Diverse Sample Generation: Pushing the Limit of Generative Data-Free Quantization [[code](https://github.com/htqin/DSG)] [![GitHub stars](https://img.shields.io/github/stars/htqin/DSG?style=social)](https://github.com/htqin/DSG)
+- [[TPAMI](https://doi.org/10.1109/TPAMI.2023.3272925)] Diverse Sample Generation: Pushing the Limit of Generative Data-Free Quantization [[code](https://github.com/htqin/DSG)] [![GitHub stars](https://img.shields.io/github/stars/htqin/DSG?style=social)](https://github.com/htqin/DSG)
 - [[TNNLS](https://ieeexplore.ieee.org/document/10049753)] BiFSMNv2: Pushing Binary Neural Networks for Keyword Spotting to Real-Network Performance [[code](https://github.com/htqin/BiFSMNv2)] [![GitHub stars](https://img.shields.io/github/stars/htqin/BiFSMNv2?style=social)](https://github.com/htqin/BiFSMNv2)
 - [[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/26268)] Fast and Accurate Binary Neural Networks Based on Depth-Width Reshaping
 - [[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/26084)] OMPQ: Orthogonal Mixed Precision Quantization
@@ -1252,7 +1272,7 @@ All paper titles and links are kept in this README. Published work is grouped by
 
 ### 2021
 
-- [[CVPR](https://arxiv.org/abs/2103.01049)] Diversifying Sample Generation for Accurate Data-Free Quantization
+- [[CVPR Oral](https://arxiv.org/abs/2103.01049)] Diversifying Sample Generation for Accurate Data-Free Quantization
 - [[ICLR](https://openreview.net/forum?id=9QLRCVysdlO)] BiPointNet: Binary Neural Network for Point Clouds [[code](https://github.com/htqin/BiPointNet)] [![GitHub stars](https://img.shields.io/github/stars/htqin/BiPointNet?style=social)](https://github.com/htqin/BiPointNet)
 - [[ICML](http://proceedings.mlr.press/v139/liu21t/liu21t.pdf)] How Do Adam and Training Strategies Help BNNs Optimization? [[code](https://github.com/liuzechun/AdamBNN)] [![GitHub stars](https://img.shields.io/github/stars/liuzechun/AdamBNN?style=social)](https://github.com/liuzechun/AdamBNN)
 - [[AAAI](https://arxiv.org/pdf/2010.02778)] Compressing Deep Convolutional Neural Networks by Stacking Low-­Dimensional Binary Convolution Filters
