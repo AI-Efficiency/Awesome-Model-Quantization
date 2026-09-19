@@ -807,6 +807,8 @@ All paper titles and links are kept in this README. Published work is grouped by
 - [[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/40123)] First-Order Error Matters: Accurate Compensation for Quantized Large Language Models [[code](https://github.com/Xingyu-Zheng/FOEM)] [![GitHub stars](https://img.shields.io/github/stars/Xingyu-Zheng/FOEM?style=social)](https://github.com/Xingyu-Zheng/FOEM)
 - [[AAAI](https://arxiv.org/abs/2503.06564)] TR-DQ: Time-Rotation Diffusion Quantization
 - [[CVPR Findings](https://arxiv.org/abs/2503.21970)] Q-MambaIR: Accurate Quantized Mamba for Efficient Image Restoration
+- [[EMNLP](https://arxiv.org/abs/2609.06161)] All for 1-Bit: Towards Genuine 1-Bit Post-Training Quantization for LLMs [[Scholar](https://scholar.google.com/scholar?hl=en&q=%22All%20for%201-Bit%3A%20Towards%20Genuine%201-Bit%20Post-Training%20Quantization%20for%20LLMs%22)]
+- [[ICCAD](https://arxiv.org/abs/2609.05764)] Interface-Aware KV Cache Quantization for Dense On-Chip NVM in Long-Context LLM Decoding [[Scholar](https://scholar.google.com/scholar?hl=en&q=%22Interface-Aware%20KV%20Cache%20Quantization%20for%20Dense%20On-Chip%20NVM%20in%20Long-Context%20LLM%20Decoding%22)]
 - [[ICLR](https://openreview.net/forum?id=7QZanjCD6M)] PT²-LLM: Post-Training Ternarization for Large Language Models [[code](https://github.com/XIANGLONGYAN/PT2-LLM)] [![GitHub stars](https://img.shields.io/github/stars/XIANGLONGYAN/PT2-LLM?style=social)](https://github.com/XIANGLONGYAN/PT2-LLM)
 - [[ICLR](https://openreview.net/forum?id=HD7tuVakmR)] Quant-dLLM: Post-Training Extreme Low-Bit Quantization for Diffusion Large Language Models
 - [[ICLR](https://openreview.net/forum?id=3AnRMvlVDw)] DVD-Quant: Data-free Video Diffusion Transformers Quantization
