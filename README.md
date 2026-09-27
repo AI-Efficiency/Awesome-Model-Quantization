@@ -1,6 +1,6 @@
 # Awesome Model Quantization [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-Awesome Model Quantization is a curated, continuously updated collection of papers, benchmarks, surveys, and open-source implementations on neural network and model quantization. It spans binary and ternary networks, post-training quantization, quantization-aware training, vector and lattice quantization, low-bit LLMs, multimodal and generative models, KV-cache quantization, low-precision training, and hardware-efficient deployment.
+Awesome Model Quantization is a curated, continuously updated collection of papers, benchmarks, surveys, and open-source implementations on neural network and model quantization. It spans binary and ternary networks, post-training quantization, quantization-aware training, vector and lattice quantization, low-bit LLMs, multimodal and generative models, KV-cache quantization, low-precision training, and hardware-efficient deployment. The project was initiated by [Haotong Qin](https://github.com/htqin). Thanks to all [contributors](https://github.com/AI-Efficiency/Awesome-Model-Quantization/graphs/contributors) for helping grow and maintain this collection.
 
 ## Quick Navigation
 
