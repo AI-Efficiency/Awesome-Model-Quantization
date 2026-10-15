@@ -54,7 +54,7 @@ Bit width alone does not specify storage overhead, arithmetic precision, or depl
 
 ## Representative Works
 
-Selected works grouped by technical approach, with authors and short method summaries. Each paper has one primary home here; the [yearly collection](#papers-by-year) includes the wider literature.
+Selected works grouped by technical approach. **Click a category to expand** its papers, authors and method summaries. Each paper has one primary home here; the [yearly collection](#papers-by-year) includes the wider literature.
 
 - **Foundations:** [Classical / QAT](#classical-quantization-and-qat) · [Data-free](#data-free-and-zero-shot-quantization) · [Binary / ternary](#extreme-low-bit-binary-and-ternary) · [Vector / codebook](#vector-lattice-and-codebook-quantization)
 - **Language models:** [Transformer / LLM](#transformer-and-llm-quantization) · [Quantized fine-tuning](#quantized-fine-tuning) · [KV cache](#kv-cache-quantization)
@@ -62,7 +62,10 @@ Selected works grouped by technical approach, with authors and short method summ
 
 **Reading the links:** Scholar opens a title search on Google Scholar, where citation counts can be viewed. Star badges show the linked GitHub repository’s stars, which may cover several papers. These are discovery aids, not rankings.
 
-### Classical Quantization and QAT
+<a id="classical-quantization-and-qat"></a>
+
+<details>
+<summary><strong>Classical Quantization and QAT</strong> · 11 papers</summary>
 
 From binary weights and learned codebooks to integer arithmetic, learned quantizers and reconstruction-based PTQ.
 
@@ -121,7 +124,12 @@ From binary weights and learned codebooks to integer arithmetic, learned quantiz
   *ICLR 2022* · `PTQ` `Activations` `Reconstruction` · [Paper](https://openreview.net/forum?id=ySQH0oDyp7) · [Code](https://github.com/wimh966/QDrop) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22QDrop%3A%20Randomly%20Dropping%20Quantization%20for%20Extremely%20Low-bit%20Post-Training%20Quantization%22) [![GitHub stars](https://img.shields.io/github/stars/wimh966/QDrop?style=flat&label=stars&color=555)](https://github.com/wimh966/QDrop)<br>
   Randomly bypasses activation quantization during reconstruction to improve low-bit generalization beyond the calibration data.
 
-### Data-Free and Zero-Shot Quantization
+</details>
+
+<a id="data-free-and-zero-shot-quantization"></a>
+
+<details>
+<summary><strong>Data-Free and Zero-Shot Quantization</strong> · 5 papers</summary>
 
 These methods replace access to the original dataset with model statistics or generated samples; they may still require calibration or optimization.
 
@@ -150,7 +158,12 @@ These methods replace access to the original dataset with model statistics or ge
   *ACL Findings 2024* · `LLM` `QAT` `Data-Free` `KV Cache` · [Paper](https://aclanthology.org/2024.findings-acl.26/) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22LLM-QAT%3A%20Data-Free%20Quantization%20Aware%20Training%20for%20Large%20Language%20Models%22)<br>
   Uses the pretrained model’s generated text for distillation-based QAT of weights, activations and KV caches.
 
-### Transformer and LLM Quantization
+</details>
+
+<a id="transformer-and-llm-quantization"></a>
+
+<details>
+<summary><strong>Transformer and LLM Quantization</strong> · 11 papers</summary>
 
 Weight-only compression, weight–activation quantization and QAT address different deployment needs. Sparse outlier handling and rotations offer complementary ways to control error.
 
@@ -209,7 +222,12 @@ Weight-only compression, weight–activation quantization and QAT address differ
   *ACL 2025* · `LLM` `QAT` `Low-Bit` · [Paper](https://aclanthology.org/2025.acl-long.498/) · [Code](https://github.com/OpenGVLab/EfficientQAT) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22EfficientQAT%3A%20Efficient%20Quantization-Aware%20Training%20for%20Large%20Language%20Models%22) [![GitHub stars](https://img.shields.io/github/stars/OpenGVLab/EfficientQAT?style=flat&label=stars&color=555)](https://github.com/OpenGVLab/EfficientQAT)<br>
   Trains block parameters first, then quantization parameters end to end, to reduce the cost of LLM QAT.
 
-### Quantized Fine-Tuning
+</details>
+
+<a id="quantized-fine-tuning"></a>
+
+<details>
+<summary><strong>Quantized Fine-Tuning</strong> · 6 papers</summary>
 
 QLoRA and related methods adapt low-bit bases with low-rank updates; PV-Tuning also optimizes discrete compressed representations.
 
@@ -243,7 +261,12 @@ QLoRA and related methods adapt low-bit bases with low-rank updates; PV-Tuning a
   *ACL 2025* · `LLM` `PEFT` `QAT` · [Paper](https://aclanthology.org/2025.acl-long.99/) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22L4Q%3A%20Parameter%20Efficient%20Quantization-Aware%20Fine-Tuning%20on%20Large%20Language%20Models%22)<br>
   Combines parameter-efficient fine-tuning with quantization-aware training.
 
-### Extreme Low-Bit, Binary and Ternary
+</details>
+
+<a id="extreme-low-bit-binary-and-ternary"></a>
+
+<details>
+<summary><strong>Extreme Low-Bit, Binary and Ternary</strong> · 10 papers</summary>
 
 Binary CNNs and transformers, post-training binarization, and native ternary pretraining have different training costs and arithmetic requirements.
 
@@ -297,7 +320,12 @@ Binary CNNs and transformers, post-training binarization, and native ternary pre
   *ICLR 2026* · `LLM` `PTQ` `Ternary` · [Paper](https://openreview.net/forum?id=7QZanjCD6M) · [Code](https://github.com/XIANGLONGYAN/PT2-LLM) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22PT%C2%B2-LLM%3A%20Post-Training%20Ternarization%20for%20Large%20Language%20Models%22) [![GitHub stars](https://img.shields.io/github/stars/XIANGLONGYAN/PT2-LLM?style=flat&label=stars&color=555)](https://github.com/XIANGLONGYAN/PT2-LLM)<br>
   Converts pretrained large language models to ternary representations.
 
-### Vector, Lattice and Codebook Quantization
+</details>
+
+<a id="vector-lattice-and-codebook-quantization"></a>
+
+<details>
+<summary><strong>Vector, Lattice and Codebook Quantization</strong> · 12 papers</summary>
 
 From CNN product quantization to LLM additive, lattice and trellis codes. QuIP provides the incoherence-processing precursor; RaBitQ contributes vector-search methodology.
 
@@ -361,7 +389,12 @@ From CNN product quantization to LLM additive, lattice and trellis codes. QuIP p
   *ICLR 2026* · `Vector Quantization` `Online` `Distortion` · [Paper](https://openreview.net/forum?id=tO3ASKZlok) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22TurboQuant%3A%20Online%20Vector%20Quantization%20with%20Near-optimal%20Distortion%20Rate%22)<br>
   Studies online vector quantization with near-optimal distortion rate.
 
-### KV Cache Quantization
+</details>
+
+<a id="kv-cache-quantization"></a>
+
+<details>
+<summary><strong>KV Cache Quantization</strong> · 4 papers</summary>
 
 These methods compress inference-time key and value tensors; their bit widths are separate from model weight precision.
 
@@ -385,7 +418,12 @@ These methods compress inference-time key and value tensors; their bit widths ar
   *ICLR 2026* · `LLM` `KV Cache` `Mixed Precision` · [Paper](https://arxiv.org/abs/2505.18610) · [Code](https://github.com/thu-nics/PM-KVQ) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22PM-KVQ%3A%20Progressive%20Mixed-precision%20KV%20Cache%20Quantization%20for%20Long-CoT%20LLMs%22) [![GitHub stars](https://img.shields.io/github/stars/thu-nics/PM-KVQ?style=flat&label=stars&color=555)](https://github.com/thu-nics/PM-KVQ)<br>
   Progressively quantizes KV caches with mixed precision for long chain-of-thought inference.
 
-### Diffusion and Generative Model Quantization
+</details>
+
+<a id="diffusion-and-generative-model-quantization"></a>
+
+<details>
+<summary><strong>Diffusion and Generative Model Quantization</strong> · 9 papers</summary>
 
 Early diffusion PTQ addresses denoising-step sensitivity; later work extends to diffusion transformers, low-rank outlier handling and video generation.
 
@@ -434,7 +472,12 @@ Early diffusion PTQ addresses denoising-step sensitivity; later work extends to 
   *ICLR 2026* · `Video Diffusion` `Quantization` `Attention Sparsity` · [Paper](https://openreview.net/forum?id=4TAG3aQljJ) · [Code](https://github.com/wlfeng0509/QuantSparse) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22QuantSparse%3A%20Comprehensively%20Compressing%20Video%20Diffusion%20Transformer%20with%20Model%20Quantization%20and%20Attention%20Sparsification%22) [![GitHub stars](https://img.shields.io/github/stars/wlfeng0509/QuantSparse?style=flat&label=stars&color=555)](https://github.com/wlfeng0509/QuantSparse)<br>
   Combines model quantization and attention sparsification to compress video diffusion transformers.
 
-### Multimodal and State Space Models
+</details>
+
+<a id="multimodal-and-state-space-models"></a>
+
+<details>
+<summary><strong>Multimodal and State Space Models</strong> · 2 papers</summary>
 
 Vision-language models and selective state space models introduce quantization sensitivities beyond those of language-only transformers.
 
@@ -448,7 +491,12 @@ Vision-language models and selective state space models introduce quantization s
   *ICML 2025* · `Mamba` `State Space Models` `PTQ` `W4A8 / W8A8` · [Paper](https://arxiv.org/abs/2503.22879) · [Code](https://github.com/enyac-group/Quamba) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Quamba2%3A%20A%20Robust%20and%20Scalable%20Post-training%20Quantization%20Framework%20for%20Selective%20State%20Space%20Models%22) [![GitHub stars](https://img.shields.io/github/stars/enyac-group/Quamba?style=flat&label=stars&color=555)](https://github.com/enyac-group/Quamba)<br>
   Uses channel clustering and state-group quantization to accommodate the sensitivity of Mamba’s selective state-space computations.
 
-### Vision, Edge and Hardware
+</details>
+
+<a id="vision-edge-and-hardware"></a>
+
+<details>
+<summary><strong>Vision, Edge and Hardware</strong> · 8 papers</summary>
 
 Vision methods and deployment systems connect quantizer design to integer kernels, memory movement and hardware costs.
 
@@ -492,7 +540,12 @@ Vision methods and deployment systems connect quantizer design to integer kernel
   *MLSys 2025* · `LLM` `W4A8KV4` `GPU Serving` · [Paper](https://proceedings.mlsys.org/paper_files/paper/2025/hash/fbe2b2f74a2ece8070d8fb073717bda6-Abstract-Conference.html) · [Code](https://github.com/mit-han-lab/omniserve) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22QServe%3A%20W4A8KV4%20Quantization%20and%20System%20Co-design%20for%20Efficient%20LLM%20Serving%22) [![GitHub stars](https://img.shields.io/github/stars/mit-han-lab/omniserve?style=flat&label=stars&color=555)](https://github.com/mit-han-lab/omniserve)<br>
   Co-designs progressive quantization, attention and GPU kernels to turn reduced precision into serving throughput.
 
-### Floating-Point and Microscaling Formats
+</details>
+
+<a id="floating-point-and-microscaling-formats"></a>
+
+<details>
+<summary><strong>Floating-Point and Microscaling Formats</strong> · 3 papers</summary>
 
 Low-bit floating-point and shared-scale formats complement integer quantization. Format design and model calibration are separate choices.
 
@@ -511,7 +564,12 @@ Low-bit floating-point and shared-scale formats complement integer quantization.
   *EMNLP 2023* · `LLM` `PTQ` `FP4` · [Paper](https://arxiv.org/abs/2310.16836) · [Code](https://github.com/nbasyl/LLM-FP4) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22LLM-FP4%3A%204-Bit%20Floating-Point%20Quantized%20Transformers%22) [![GitHub stars](https://img.shields.io/github/stars/nbasyl/LLM-FP4?style=flat&label=stars&color=555)](https://github.com/nbasyl/LLM-FP4)<br>
   Searches exponent configurations and quantization parameters to handle weight and activation range differences in 4-bit floating point.
 
-### Low-Precision Training and States
+</details>
+
+<a id="low-precision-training-and-states"></a>
+
+<details>
+<summary><strong>Low-Precision Training and States</strong> · 5 papers</summary>
 
 Quantization can reduce saved activations, optimizer states, gradient communication or training arithmetic; each targets a different part of the training cost.
 
@@ -539,6 +597,8 @@ Quantization can reduce saved activations, optimizer states, gradient communicat
   Ruizhe Wang, Yeyun Gong, Xiao Liu, Guoshuai Zhao, Ziyue Yang, Baining Guo, Zhengjun Zha, Peng Cheng<br>
   *ICML 2025* · `LLM Training` `FP4` `Gradient Estimation` · [Paper](https://arxiv.org/abs/2501.17116) · [Scholar](https://scholar.google.com/scholar?hl=en&q=%22Optimizing%20Large%20Language%20Model%20Training%20Using%20FP4%20Quantization%22)<br>
   Combines differentiable quantization estimation with outlier handling to stabilize FP4 LLM training.
+
+</details>
 
 ## Benchmarks
 
