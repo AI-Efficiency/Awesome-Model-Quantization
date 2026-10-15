@@ -804,6 +804,8 @@ All paper titles and links are kept in this README. Published work is grouped by
 
 ### 2026
 
+- [[arXiv](https://arxiv.org/pdf/2610.14934)] FidelityQ: Preserving Predictive Fidelity in Ultra-Low-Bit Language Model Quantization [[Scholar](https://scholar.google.com/scholar?hl=en&q=%22FidelityQ%3A%20Preserving%20Predictive%20Fidelity%20in%20Ultra-Low-Bit%20Language%20Model%20Quantization%22)]
+- [[arXiv](https://arxiv.org/pdf/2610.15259)] RECAP: Calibrating Low-Bit Reasoning Models on the History They Read [[Scholar](https://scholar.google.com/scholar?hl=en&q=%22RECAP%3A%20Calibrating%20Low-Bit%20Reasoning%20Models%20on%20the%20History%20They%20Read%22)]
 - [[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/40123)] First-Order Error Matters: Accurate Compensation for Quantized Large Language Models [[code](https://github.com/Xingyu-Zheng/FOEM)] [![GitHub stars](https://img.shields.io/github/stars/Xingyu-Zheng/FOEM?style=social)](https://github.com/Xingyu-Zheng/FOEM)
 - [[AAAI](https://arxiv.org/abs/2503.06564)] TR-DQ: Time-Rotation Diffusion Quantization
 - [[ICLR](https://openreview.net/forum?id=7QZanjCD6M)] PT²-LLM: Post-Training Ternarization for Large Language Models [[code](https://github.com/XIANGLONGYAN/PT2-LLM)] [![GitHub stars](https://img.shields.io/github/stars/XIANGLONGYAN/PT2-LLM?style=social)](https://github.com/XIANGLONGYAN/PT2-LLM)
