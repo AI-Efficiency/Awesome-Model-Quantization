@@ -945,6 +945,7 @@ All paper titles and links are kept in this README. Published work is grouped by
 - [[arXiv](https://arxiv.org/pdf/2603.25284v1)] SliderQuant: Accurate Post-Training Quantization for LLMs [[code](https://github.com/deep-optimization/SliderQuant)] [![GitHub stars](https://img.shields.io/github/stars/deep-optimization/SliderQuant?style=social)](https://github.com/deep-optimization/SliderQuant)
 - [[arXiv](https://arxiv.org/abs/2601.14888)] What Makes Low-Bit Quantization-Aware Training Work for Reasoning LLMs? A Systematic Study
 - [[arXiv](https://arxiv.org/abs/2603.28845)] OneComp: One-Line Revolution for Generative AI Model Compression [[Code](https://github.com/FujitsuResearch/OneCompression)] [![GitHub stars](https://img.shields.io/github/stars/FujitsuResearch/OneCompression?style=social)](https://github.com/FujitsuResearch/OneCompression)
+- [[arXiv](https://arxiv.org/abs/2610.31309)] Extreme Compression of Per-Layer Embeddings via Cross-Layer Latent Vector Quantization [[code](https://github.com/VILA-Lab/optic)] [![GitHub stars](https://img.shields.io/github/stars/VILA-Lab/optic?style=social)](https://github.com/VILA-Lab/optic)
 
 ### 2025
 
