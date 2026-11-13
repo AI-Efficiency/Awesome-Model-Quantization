@@ -1679,6 +1679,7 @@ Tools are grouped by role. Supported formats and hardware vary by version; see e
 | [HQQ](https://github.com/dropbox/hqq) | Half-quadratic weight quantization without calibration data. | [![GitHub stars](https://img.shields.io/github/stars/dropbox/hqq?style=flat&label=stars&color=555)](https://github.com/dropbox/hqq) |
 | [AIMET](https://github.com/qualcomm/aimet) | Post-training and quantization-aware model optimization. | [![GitHub stars](https://img.shields.io/github/stars/qualcomm/aimet?style=flat&label=stars&color=555)](https://github.com/qualcomm/aimet) |
 | [Brevitas](https://github.com/Xilinx/brevitas) | PyTorch quantization-aware training with configurable quantizers and hardware export. | [![GitHub stars](https://img.shields.io/github/stars/Xilinx/brevitas?style=flat&label=stars&color=555)](https://github.com/Xilinx/brevitas) |
+| [FRACTAL](https://github.com/Fractal-Compute-Orchestrations/FractalWorkspace) | Edge federated learning and graph slicing framework with 64-element block INT4 quantization. | [![GitHub stars](https://img.shields.io/github/stars/Fractal-Compute-Orchestrations/FractalWorkspace?style=flat&label=stars&color=555)](https://github.com/Fractal-Compute-Orchestrations/FractalWorkspace) |
 
 ### Inference and hardware
 
